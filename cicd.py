@@ -32,16 +32,16 @@ admin_accesstoken = admin_url_regex.search(destination_admin_url).group(1)
 curl_url = admin_url_regex.search(destination_admin_url).group(2)
 print 'Access Token =>' + admin_accesstoken
 print 'Curl URL =>' + curl_url
-print 'filename =>' filename
-print 'env_to_promote =>' env_to_promote
-print 'source_admin_url =>' source_admin_url
-print 'destination_admin_url =>' destination_admin_url
+print 'filename =>' + filename
+print 'env_to_promote =>' + env_to_promote
+print 'source_admin_url =>' + source_admin_url
+print 'destination_admin_url =>' + destination_admin_url
 
 add_remote_cmd = '3scale -k remote add abg-cicd ' + destination_admin_url
 add_remote = subprocess.check_output(add_remote_cmd, shell=True, universal_newlines=True)
 
 environment = json.loads(readFile(filename))
-print 'environment =>' environment
+print 'environment =>' + environment
 
 #zyncsso_url = environment[env_to_promote]["zyncsso_url"]
 #print "Zync SSO URL->" + zyncsso_url
