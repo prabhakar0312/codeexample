@@ -1,0 +1,37 @@
+{
+  "QA":
+    {
+    "products":[
+        {
+        "product":"vehicle_locations",
+        "staging_public_baseurl":"https://vehicle-locations-3scale-apicast-staging.qa.apps.api.abgapiservices.com",
+        "production_public_baseurl":"https://vehicle-locations-3scale-apicast-production.qa.apps.api.abgapiservices.com:443",
+        "zyncsso_url":"https://zync-sso:e7a0b443-4b73-4399-b3cb-2c2abc574b20@sso-sso.apps.api.abgapiservices.com/auth/realms/3scale-qa-api-oidc"
+        },
+        {
+        "product":"oauth",
+        "staging_public_baseurl":"https://oauth-3scale-apicast-staging.qa.apps.api.abgapiservices.com:443",
+        "production_public_baseurl":"https://oauth-3scale-apicast-production.qa.apps.api.abgapiservices.com:443",
+        "zyncsso_url":"https://zync-sso:e7a0b443-4b73-4399-b3cb-2c2abc574b20@sso-sso.apps.api.abgapiservices.com/auth/realms/3scale-qa-api-oidc"
+        },            
+        {
+        "product":"offers",
+        "staging_public_baseurl":"https://offers-3scale-apicast-staging.qa.apps.api.abgapiservices.com:443",
+        "production_public_baseurl":"https://offers-3scale-apicast-production.apps.qa.api.abgapiservices.com:443",
+        "zyncsso_url":"https://zync-sso:20faceb7-a036-41c2-b32a-2eb97931730e@sso-sso.apps.api.abgapiservices.com/auth/realms/3scale-dev-api-oidc"
+        },            
+        {
+        "product":"reservation",
+        "staging_public_baseurl":"https://reservation-3scale-apicast-staging.apps.qa.api.abgapiservices.com:443",
+        "production_public_baseurl":"https://reservation-3scale-apicast-production.apps.qa.api.abgapiservices.com:443",
+        "zyncsso_url":"https://zync-sso:20faceb7-a036-41c2-b32a-2eb97931730e@sso-sso.apps.api.abgapiservices.com/auth/realms/3scale-dev-api-oidc"
+        }
+      ],
+      "backends":[
+          {
+            "backend":"ms_alb",
+            "private_base_url":"https://alb-ue2-t-tempest-ms-148905530.us-east-2.elb.amazonaws.com:443/"
+          }
+       ]
+    }
+}
