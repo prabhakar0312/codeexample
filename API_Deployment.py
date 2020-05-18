@@ -44,7 +44,7 @@ print "Product Proxy Configuration Updated  =>" + service_id
 
 #Apply Product Policies
 
-product_policy_cmd = 'curl -k -s -X PATCH "https://' + admin_url + \
+product_policy_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
 										'/admin/api/services/' + service_id + '/proxy/policies.json"' + \
 										' -d \'access_token=' + admin_accesstoken + '\'' + \
                                         ' -d \'policies_config=' + "policy_config" + '\''
