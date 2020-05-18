@@ -3,7 +3,7 @@ import sys
 import subprocess
 import re
 
-admin_accesstoken = '5784df32c7d2e9cc071bfaf3240e9144161f48c04cb349e225e7af1a047b12dc'
+admin_accesstoken = 'eca716de14ec2de174ffcbb8709b4b2dafa62b92701ce302a64c1d84020e6714'
 filename = sys.argv[1]
 
 product_deploy_config=json.loads(readFile(filename))
