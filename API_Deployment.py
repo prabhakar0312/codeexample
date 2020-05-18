@@ -66,7 +66,6 @@ get_version_cmd = 'curl -k -s  -X GET "https://' + admin_url + \
 get_version = json.loads(subprocess.check_output(get_version_cmd, shell=True, universal_newlines=True))
 version = get_version["proxy_config"]["version"]
 
-print "Product Staging Version =>" + version
 
 #Promote to Production
 promote_production_cmd= 'curl -k -s  -X POST "https://' + admin_url + \
@@ -75,4 +74,4 @@ promote_production_cmd= 'curl -k -s  -X POST "https://' + admin_url + \
            + admin_accesstoken + '&to=production"';
 promote_production = subprocess.check_output(promote_production_cmd, shell=True, universal_newlines=True)
 
-print "Product Promoted to Production =>" + version
+print "Product Promoted to Production =>"
