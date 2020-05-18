@@ -1,0 +1,27 @@
+<proxy>
+  <credentials_location>query</credentials_location>
+  <auth_app_key>app_key</auth_app_key>
+  <auth_app_id>app_id</auth_app_id>
+  <auth_user_key>user_key</auth_user_key>
+  <error_auth_failed>{     "error": "invalid_grant", "error_description": "token not found, expired or invalid"  }</error_auth_failed>
+  <error_auth_missing>{     "error": "invalid_request",     "description": "The required parameter access token is missing." }</error_auth_missing>
+  <error_status_auth_failed>401</error_status_auth_failed>
+  <error_headers_auth_failed>application/json</error_headers_auth_failed>
+  <error_status_auth_missing>400</error_status_auth_missing>
+  <error_headers_auth_missing>application/json</error_headers_auth_missing>
+  <error_no_match>{     "error": "invalid_request",     "description": "No Mapping Rule matched." }</error_no_match>
+  <error_status_no_match>404</error_status_no_match>
+  <error_headers_no_match>application/json</error_headers_no_match>
+  <error_limits_exceeded>{     "error": "invalid_request",     "description": "Usage limit exceeded." }</error_limits_exceeded>
+  <error_status_limits_exceeded>429</error_status_limits_exceeded>
+  <error_headers_limits_exceeded>application/json</error_headers_limits_exceeded>
+  <hostname_rewrite/>
+  <api_test_path>/</api_test_path>
+  <policies_config>[{"name"=&gt;"headers", "version"=&gt;"builtin", "configuration"=&gt;{"response"=&gt;[{"value_type"=&gt;"plain", "op"=&gt;"set", "header"=&gt;"Cache-Control", "value"=&gt;"no-cache,no-store"}, {"value_type"=&gt;"plain", "op"=&gt;"set", "header"=&gt;"Pragma", "value"=&gt;"no-cache"}, {"value_type"=&gt;"plain", "op"=&gt;"set", "header"=&gt;"Expires", "value"=&gt;"0"}]}, "enabled"=&gt;true}, {"name"=&gt;"cors", "version"=&gt;"builtin", "configuration"=&gt;{"allow_headers"=&gt;["*"], "allow_methods"=&gt;["OPTIONS", "GET", "POST", "PUT", "PATCH"], "allow_origin"=&gt;"*"}, "enabled"=&gt;true}, {"name"=&gt;"apicast", "version"=&gt;"builtin", "configuration"=&gt;{}, "enabled"=&gt;true}, {"name"=&gt;"url_rewriting", "version"=&gt;"builtin", "configuration"=&gt;{"commands"=&gt;[{"op"=&gt;"sub", "regex"=&gt;"/context/v1/offers", "replace"=&gt;"/handshake/v1/context"}]}, "enabled"=&gt;true}]</policies_config>
+  <created_at>2020-05-01 13:33:32 UTC</created_at>
+  <updated_at>2020-05-15 14:36:26 UTC</updated_at>
+  <deployment_option>hosted</deployment_option>
+  <lock_version>39</lock_version>
+  <jwt_claim_with_client_id>azp</jwt_claim_with_client_id>
+  <jwt_claim_with_client_id_type>plain</jwt_claim_with_client_id_type>
+</proxy>
