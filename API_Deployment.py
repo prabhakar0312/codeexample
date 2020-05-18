@@ -34,7 +34,7 @@ product_proxy_cmd = 'curl -k -s -X PATCH "https://' + admin_url + \
 							      ' --data-urlencode \'oidc_issuer_endpoint=' + product_deploy_config["oidc_endpoint"] + '\'' + \
 							      ' --data-urlencode \'sandbox_endpoint=' + product_deploy_config["sandbox_endpoint"] + '\'' + \
 							      ' --data-urlencode \'endpoint=' + product_deploy_config["endpoint"] + '\'' + \
-                                  ' -d \'oidc_issuer_type=' + keycloak + '\''
+                                  ' -d \'oidc_issuer_type=' + "keycloak" + '\''
                                   
 product_proxy = subprocess.check_output(product_proxy_cmd, shell=True, universal_newlines=True)
 
