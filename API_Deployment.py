@@ -47,7 +47,7 @@ print "Product Proxy Configuration Updated  =>" + service_id
 product_policy_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
 										'/admin/api/services/' + service_id + '/proxy/policies.json"' + \
 										' -d \'access_token=' + admin_accesstoken + '\'' + \
-                                        ' -d \'policies_config=' + "policy_config" + '\''
+                                        ' -d \'policies_config=' + policy_config + '\''
                                   
 product_policy= subprocess.check_output(product_policy_cmd, shell=True, universal_newlines=True)                                 
 print "Product Gateway Policy Applied =>" + product_policy
