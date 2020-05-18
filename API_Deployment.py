@@ -3,6 +3,12 @@ import sys
 import subprocess
 import re
 
+def readFile(filename):
+	file = open(filename)
+	file_text = file.read()
+	file.close()
+	return file_text
+
 admin_accesstoken = 'eca716de14ec2de174ffcbb8709b4b2dafa62b92701ce302a64c1d84020e6714'
 filename = sys.argv[1]
 
