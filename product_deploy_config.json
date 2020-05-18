@@ -1,5 +1,6 @@
 {
 	"product_name":"testproduct_deploy",
+	"admin_url":"3scale-admin.apps.api.abgapiservices.com",
 	"sandbox_endpoint":"https://testproduct_deploy-3scale-apicast-staging.qa.apps.api.abgapiservices.com",
 	"endpoint":"https://testproduct_deploy-3scale-apicast-production.qa.apps.api.abgapiservices.com:443",
 	"oidc_endpoint":"https://zync-sso:e7a0b443-4b73-4399-b3cb-2c2abc574b20@sso-sso.apps.api.abgapiservices.com/auth/realms/3scale-dev-api-oidc"
