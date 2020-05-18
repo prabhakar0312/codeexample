@@ -17,7 +17,7 @@ admin_url = '3scale-admin.apps.api.abgapiservices.com'
 
 remote_name = 'abg-cicd'
 
-add_remote_cmd = '3scale -k remote add abg-cicd ' + admin_url
+add_remote_cmd = '3scale -k remote add abg-cicd https://' + admin_accesstoken + '@' +admin_url
 add_remote = subprocess.check_output(add_remote_cmd, shell=True, universal_newlines=True)
 
 #Create API Product
