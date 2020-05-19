@@ -33,7 +33,7 @@ print "Product Created =>" + service_id
 #Apply Product Policies
 #curl -k -X PUT "https://$PORTAL_ENDPOINT/admin/api/services/$SERVICE_ID/proxy/policies.json" --data "access_token=$TOKEN" --data-urlencode #policies_config@policies_config.json
 
-product_policy_cmd = 'curl -k -s -X -H "Content-type: application/json" PUT "https://' + admin_url + \
+product_policy_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
 									'/admin/api/services/' + service_id + '/proxy/policies.json"' + \
 									' -d \'access_token=' + admin_accesstoken + '\'' + \
 									' --data-urlencode \'policies_config=' + policy_config + '\''
