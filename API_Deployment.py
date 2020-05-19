@@ -41,10 +41,9 @@ product_policies_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
 									' --data-urlencode \'policies_config=' + policies + '\''
 
 product_policy= subprocess.check_output(product_policies_cmd, shell=True, universal_newlines=True)                                 
-print "Product Gateway Policy Command =>" + product_policies_cmd
+#print "Product Gateway Policy Command =>" + product_policies_cmd
 print "Product Gateway Policy Applied =>" + policies
 
-print "Product Gateway Ploicy Response =>" + policy_config
 
 #Apply API Product - Proxy Configuration
 product_proxy_cmd = 'curl -k -s -X PATCH "https://' + admin_url + \
