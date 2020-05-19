@@ -31,6 +31,16 @@ apply_product = subprocess.check_output(apply_product_cmd, shell=True, universal
 service_id = apply_product.split(":")[1].strip()
 print "Product Created =>" + service_id
 
+#Apply Product Policies
+
+product_policy_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
+									'/admin/api/services/' + service_id + '/proxy/policies.json"' + \
+									' -d \'access_token=' + admin_accesstoken + '\'' + \
+									' --data-urlencode \'policies_config=' + policy_config + '\''
+
+product_policy= subprocess.check_output(product_policy_cmd, shell=True, universal_newlines=True)                                 
+print "Product Gateway Policy Applied =>" + policy_config
+
 #Apply API Product - Proxy Configuration
 product_proxy_cmd = 'curl -k -s -X PATCH "https://' + admin_url + \
 										'/admin/api/services/' + service_id + '/proxy.xml"' + \
@@ -45,15 +55,7 @@ product_proxy_cmd = 'curl -k -s -X PATCH "https://' + admin_url + \
 product_proxy = subprocess.check_output(product_proxy_cmd, shell=True, universal_newlines=True)
 print "Product Proxy Configuration Updated  =>" + service_id
 
-#Apply Product Policies
 
-product_policy_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
-									'/admin/api/services/' + service_id + '/proxy/policies.json"' + \
-									' -d \'access_token=' + admin_accesstoken + '\'' + \
-									' --data-urlencode \'policies_config=' + policy_config + '\''
-
-product_policy= subprocess.check_output(product_policy_cmd, shell=True, universal_newlines=True)                                 
-print "Product Gateway Policy Applied =>" + policy_config
 
 
 #Promote to Staging
