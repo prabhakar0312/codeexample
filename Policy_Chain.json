@@ -1,5 +1,5 @@
 {
- "policies_config": [
+ "policy_chain": [
   {
    "name": "headers",
    "version": "builtin",
