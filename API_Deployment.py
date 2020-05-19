@@ -33,14 +33,16 @@ print "Product Created =>" + service_id
 #Apply Product Policies
 #curl -k -X PUT "https://$PORTAL_ENDPOINT/admin/api/services/$SERVICE_ID/proxy/policies.json" --data "access_token=$TOKEN" --data-urlencode #policies_config@policies_config.json
 
-product_policy_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
+policies = '{"policies_config" : [{"version": "builtin", "enabled": true, "name": "cors", "configuration": {"allow_origin": "*", "allow_methods": ["OPTIONS", "GET", "POST", "PUT", "PATCH"], "allow_headers": ["*"]}}, {"version": "builtin", "enabled": true, "name": "headers", "configuration": {"response": [{"header": "Cache-Control", "value_type": "plain", "value": "no-cache,no-store", "op": "add"}, {"header": "Pragma", "value_type": "plain", "value": "no-cache", "op": "add"}, {"header": "Expires", "value_type": "plain", "value": "0", "op": "add"}]}}, {"version": "builtin", "enabled": true, "name": "apicast", "configuration": {}}, {"version": "builtin", "enabled": true, "name": "url_rewriting", "configuration": {"commands": [{"regex": "/context/v1/offers", "replace": "/handshake/v1/context", "options": "i", "op": "gsub"}]}}]}'
+
+product_policies_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
 									'/admin/api/services/' + service_id + '/proxy/policies.json"' + \
 									' -d \'access_token=' + admin_accesstoken + '\'' + \
-									' --data-urlencode \'policies_config=' + policy_config + '\''
+									' --data-urlencode \'policies_config=' + policies + '\''
 
 product_policy= subprocess.check_output(product_policy_cmd, shell=True, universal_newlines=True)                                 
-print "Product Gateway Policy Applied =>" + product_policy_cmd
-print "Product Gateway Policy Applied =>" + product_policy
+print "Product Gateway Policy Command =>" + product_policy_cmd
+print "Product Gateway Policy Applied =>" + policies
 
 print "Product Gateway Ploicy Response =>" + policy_config
 
