@@ -16,7 +16,6 @@ policy_filename = sys.argv[2]
 
 product_deploy_config=json.loads(readFile(filename))
 policy_config=json.loads(readFile(policy_filename))
-policy_config=json.dumps(policy_config) 
 admin_url = '3scale-admin.apps.api.abgapiservices.com'
 
 remote_name = 'abg-cicd'
@@ -34,10 +33,10 @@ print "Product Created =>" + service_id
 #Apply Product Policies
 #curl -k -X PUT "https://$PORTAL_ENDPOINT/admin/api/services/$SERVICE_ID/proxy/policies.json" --data "access_token=$TOKEN" --data-urlencode #policies_config@policies_config.json
 
-product_policy_cmd = 'curl -k -s -X  PUT "https://' + admin_url + \
+product_policy_cmd = 'curl -k -s -X -H "Content-type: application/json" PUT "https://' + admin_url + \
 									'/admin/api/services/' + service_id + '/proxy/policies.json"' + \
 									' -d \'access_token=' + admin_accesstoken + '\'' + \
-									' --data-urlencode \'policies_config=' +'./'+ policy_filename + '\''
+									' --data-urlencode \'policies_config=' + policy_config + '\''
 
 product_policy= subprocess.check_output(product_policy_cmd, shell=True, universal_newlines=True)                                 
 print "Product Gateway Policy Applied =>" + product_policy_cmd
