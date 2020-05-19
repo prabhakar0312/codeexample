@@ -1,22 +1,69 @@
 {
-  "services":[
-    {
-      "id":43,
-      "proxy":{
-        "policy_chain":[
-          {
-            "name": "token_introspection", "version": "builtin",
-            "configuration": {
-              introspection_url:["https://tokenauthorityexample.com"],
-              client_id:["exampleName"],
-              client_secret:["secretexamplekey123"]
-          },
-          {
-             "name": "apicast", "version": "builtin",
-          }
-        ]
-      }
-    }
-  ]
-}
+ "policies_config": [
+  {
+   "name": "headers",
+   "version": "builtin",
+   "configuration": {
+    "response": [
+     {
+      "value_type": "plain",
+      "op": "set",
+      "header": "Cache-Control",
+      "value": "no-cache,no-store"
+     },
+     {
+      "value_type": "plain",
+      "op": "set",
+      "header": "Pragma",
+      "value": "no-cache"
+     },
+     {
+      "value_type": "plain",
+      "op": "set",
+      "header": "Expires",
+      "value": "0"
+     }
+    ]
+   },
+   "enabled": true
+  },
+  {
+   "name": "cors",
+   "version": "builtin",
+   "configuration": {
+    "allow_headers": [
+     "*"
+    ],
+    "allow_methods": [
+     "OPTIONS",
+     "GET",
+     "POST",
+     "PUT",
+     "PATCH"
+    ],
+    "allow_origin": "*"
+   },
+   "enabled": true
+  },
+  {
+   "name": "apicast",
+   "version": "builtin",
+   "configuration": {},
+   "enabled": true
+  },
+  {
+   "name": "url_rewriting",
+   "version": "builtin",
+   "configuration": {
+    "commands": [
+     {
+      "op": "sub",
+      "regex": "/context/v1/offers",
+      "replace": "/handshake/v1/context"
+     }
+    ]
+   },
+   "enabled": true
+  }
+ ]
 }
