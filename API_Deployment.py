@@ -40,6 +40,7 @@ product_policy_cmd = 'curl -k -s -X  PUT "https://' + admin_url + \
 									' --data-urlencode \'policies_config@' + policy_filename + '\''
 
 product_policy= subprocess.check_output(product_policy_cmd, shell=True, universal_newlines=True)                                 
+print "Product Gateway Policy Applied =>" + product_policy_cmd
 print "Product Gateway Policy Applied =>" + product_policy
 
 print "Product Gateway Ploicy Response =>" + policy_config
