@@ -35,7 +35,7 @@ print "Product Created =>" + service_id
 
 policies = '{"policies_config" : [{"version": "builtin", "enabled": true, "name": "cors", "configuration": {"allow_origin": "*", "allow_methods": ["OPTIONS", "GET", "POST", "PUT", "PATCH"], "allow_headers": ["*"]}}, {"version": "builtin", "enabled": true, "name": "headers", "configuration": {"response": [{"header": "Cache-Control", "value_type": "plain", "value": "no-cache,no-store", "op": "add"}, {"header": "Pragma", "value_type": "plain", "value": "no-cache", "op": "add"}, {"header": "Expires", "value_type": "plain", "value": "0", "op": "add"}]}}, {"version": "builtin", "enabled": true, "name": "apicast", "configuration": {}}, {"version": "builtin", "enabled": true, "name": "url_rewriting", "configuration": {"commands": [{"regex": "/context/v1/offers", "replace": "/handshake/v1/context", "options": "i", "op": "gsub"}]}}]}'
 
-product_policies_cmd = 'curl -k -s -X PUT -H "Content-Type: application/json https://' + admin_url + \
+product_policies_cmd = 'curl -k -s -X PUT -H "Content-Type: application/json" "https://' + admin_url + \
 									'/admin/api/services/' + service_id + '/proxy/policies.json"' + \
 									' -d \'@' + policy_filename + '\'' + \
 									' -d \'access_token=' + admin_accesstoken + '\'' 
