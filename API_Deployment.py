@@ -38,8 +38,8 @@ product_policy_cmd = 'curl -k -s -X PUT -H "Content-Type: application/json" "htt
 									' -d \'access_token=' + admin_accesstoken + '\'' + \
 									' -d \'@' + policy_filename + '\''
 
-product_policy= subprocess.check_output(product_policies_cmd, shell=True, universal_newlines=True)                                 
-print "Product Gateway Policy Command =>" + product_policies_cmd
+product_policy= subprocess.check_output(product_policy_cmd, shell=True, universal_newlines=True)                                 
+print "Product Gateway Policy Command =>" + product_policy_cmd
 print "Product Gateway Policy Applied =>" + product_policy
 
 
