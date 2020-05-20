@@ -37,7 +37,7 @@ policies = '{"policies_config" : [{"version": "builtin", "enabled": true, "name"
 
 product_policies_cmd = 'curl -k -s -X PUT -H "Content-Type: application/json" "https://' + admin_url + \
 									'/admin/api/services/' + service_id + '/proxy/policies.json?access_token='+admin_accesstoken + '"' + \
-									' -d \'@' + policy_filename + '\''
+									' -d \@' + policy_filename + '
 
 product_policy= subprocess.check_output(product_policies_cmd, shell=True, universal_newlines=True)                                 
 print "Product Gateway Policy Command =>" + product_policies_cmd
