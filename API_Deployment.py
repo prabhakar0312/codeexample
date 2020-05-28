@@ -16,7 +16,7 @@ policy_filename = sys.argv[2]
 
 product_deploy_config=json.loads(readFile(filename))
 policy_config=json.loads(readFile(policy_filename))
-admin_url = '3scale-admin.apps.api.abgapiservices.com'
+admin_url = '3scale-admin.dev.apps.api-np.abgapiservices.com'
 
 remote_name = 'abg-cicd'
 
