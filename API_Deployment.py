@@ -10,7 +10,7 @@ def readFile(filename):
 	file.close()
 	return file_text
 
-admin_accesstoken = 'eca716de14ec2de174ffcbb8709b4b2dafa62b92701ce302a64c1d84020e6714'
+admin_accesstoken = '416989be027cf0866733113a199414993291dd5fa7e04e3dd6eca85fdcfe4e23'
 filename = sys.argv[1]
 policy_filename = sys.argv[2]
 
