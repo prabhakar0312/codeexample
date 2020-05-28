@@ -1,9 +1,9 @@
 {
 	"product_name":"testproduct_deploy",
-	"admin_url":"3scale-admin.apps.api.abgapiservices.com",
-	"sandbox_endpoint":"https://testproduct_deploy-3scale-apicast-staging.qa.apps.api.abgapiservices.com",
-	"endpoint":"https://testproduct_deploy-3scale-apicast-production.qa.apps.api.abgapiservices.com:443",
-	"oidc_endpoint":"https://zync-sso:e7a0b443-4b73-4399-b3cb-2c2abc574b20@sso-sso.apps.api.abgapiservices.com/auth/realms/3scale-dev-api-oidc",
+	"admin_url":"3scale-admin.dev.apps.api-np.abgapiservices.com",
+	"sandbox_endpoint":"https://testproduct_deploy-3scale-apicast-staging.dev.apps.api-np.abgapiservices.com",
+	"endpoint":"https://testproduct_deploy-3scale-apicast-production.dev.apps.api-np.abgapiservices.com:443",
+	"oidc_endpoint":"https://zync-sso:adfe0bbb-0717-45d7-bcfa-0b75d4d363bd@sso-sso.apps.api-np.abgapiservices.com/auth/realms/3scale-dev-api-oidc",
 	"api_backend":"https://alb-ue2-t-tempest-ms-148905530.us-east-2.elb.amazonaws.com:443",
 	"api_test_path":"/"
 }
