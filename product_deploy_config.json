@@ -1,5 +1,5 @@
 {
-	"product_name":"testproduct_deploy",
+	"product_name":"testproduct deploy",
 	"admin_url":"3scale-admin.dev.apps.api-np.abgapiservices.com",
 	"sandbox_endpoint":"https://testproduct_deploy-3scale-apicast-staging.dev.apps.api-np.abgapiservices.com",
 	"endpoint":"https://testproduct_deploy-3scale-apicast-production.dev.apps.api-np.abgapiservices.com:443",
