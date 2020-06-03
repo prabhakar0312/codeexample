@@ -56,28 +56,7 @@ product_proxy_cmd = 'curl -k -s -X PATCH "https://' + admin_url + \
 product_proxy = subprocess.check_output(product_proxy_cmd, shell=True, universal_newlines=True)
 print "Product Proxy Configuration Updated  =>" + service_id
 
-#API Specs
 
-api_name='Test API'
-api_systemname='APISystemName'
-api_desc='API Description'
-skip_swagger='true'
-
-#product_activedocs_cmd = 'curl -k -s -X PUT  "https://' + admin_url + \
- #                                  '/admin/api/active_docs.json"' + \
-  #                                  ' -d \'access_token=' + admin_accesstoken + '\'' + \
-   #                                 ' --data-urlencode \'name=' + api_name + '\'' + \
-    ##                                ' --data-urlencode \'service_id=' + service_id + '\'' + \
-      #                              ' --data-urlencode @\'body=' + apispec_filename + '\'' + \
-       #                             ' --data-urlencode \'description=' + api_desc + '\'' + \
-        #                            ' --data-urlencode \'system_name=' + api_systemname + '\'' + \
-         #                           ' --data-urlencode \'skip_swagger_validations=' + skip_swagger + '\''
-         
-#product_activedocs_cmd='3scale -k activedocs apply abg-cicd Promo -d=' + api_desc + ' -i=' + str(service_id) + ' --openapi-spec=' +apispec_filename + ' -p=true -s=Rentalstest --skip-swagger-validations=true'
-                                    
-#product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)  
-#print "Product product_activedocs Command =>" + product_activedocs_cmd
-#print "Product product_activedocs Applied =>" + product_activedocs
 
 
 #Promote to Staging
@@ -93,7 +72,6 @@ get_version_cmd = 'curl -k -s  -X GET "https://' + admin_url + \
            '/proxy/configs/sandbox/latest.json?access_token=' + admin_accesstoken + '"';
 get_version = json.loads(subprocess.check_output(get_version_cmd, shell=True, universal_newlines=True))
 version = get_version["proxy_config"]["version"]
-
 
 #Promote to Production
 promote_production_cmd= 'curl -k -s  -X POST "https://' + admin_url + \
