@@ -74,8 +74,8 @@ product_activedocs_cmd = 'curl -k -s -X POST -H "Content-Type: application/json"
                                     ' --data-urlencode \'skip_swagger_validations=' + skip_swagger + '\''
                                     
 product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)  
-
-
+print "Product product_activedocs Command =>" + product_activedocs_cmd
+print "Product product_activedocs Applied =>" + product_activedocs
 
 
 #Promote to Staging
