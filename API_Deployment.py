@@ -73,11 +73,11 @@ skip_swagger='true'
         #                            ' --data-urlencode \'system_name=' + api_systemname + '\'' + \
          #                           ' --data-urlencode \'skip_swagger_validations=' + skip_swagger + '\''
          
-product_activedocs_cmd='3scale -k activedocs apply abg-cicd Promo -d=' + api_desc + ' -i=' + str(service_id) + ' --openapi-spec=' +apispec_filename + ' -p=true -s=Rentalstest --skip-swagger-validations=true'
+#product_activedocs_cmd='3scale -k activedocs apply abg-cicd Promo -d=' + api_desc + ' -i=' + str(service_id) + ' --openapi-spec=' +apispec_filename + ' -p=true -s=Rentalstest --skip-swagger-validations=true'
                                     
-product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)  
-print "Product product_activedocs Command =>" + product_activedocs_cmd
-print "Product product_activedocs Applied =>" + product_activedocs
+#product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)  
+#print "Product product_activedocs Command =>" + product_activedocs_cmd
+#print "Product product_activedocs Applied =>" + product_activedocs
 
 
 #Promote to Staging
