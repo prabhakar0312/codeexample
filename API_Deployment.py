@@ -63,15 +63,15 @@ api_systemname='APISystemName'
 api_desc='API Description'
 skip_swagger='true'
 
-product_activedocs_cmd = 'curl -k -s -X POST -H "Content-Type: application/json" "https://' + admin_url + \
+product_activedocs_cmd = 'curl -k -s -X PUT  "https://' + admin_url + \
                                    '/admin/api/active_docs.json"' + \
                                     ' -d \'access_token=' + admin_accesstoken + '\'' + \
-                                    ' --data-urlencode \name=' + api_name + '\'' + \
-                                    ' --data-urlencode \service_id=' + service_id + '\'' + \
-                                    ' --data-urlencode @\body=' + apispec_filename + '\'' + \
-                                    ' --data-urlencode \description=' + api_desc + '\'' + \
-                                    ' --data-urlencode \system_name=' + api_systemname + '\'' + \
-                                    ' --data-urlencode \skip_swagger_validations=' + skip_swagger + '\''
+                                    ' --data-urlencode \'name=' + api_name + '\'' + \
+                                    ' --data-urlencode \'service_id=' + service_id + '\'' + \
+                                    ' --data-urlencode @\'body=' + apispec_filename + '\'' + \
+                                    ' --data-urlencode \'description=' + api_desc + '\'' + \
+                                    ' --data-urlencode \'system_name=' + api_systemname + '\'' + \
+                                    ' --data-urlencode \'skip_swagger_validations=' + skip_swagger + '\''
                                     
 product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)  
 print "Product product_activedocs Command =>" + product_activedocs_cmd
