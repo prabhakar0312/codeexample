@@ -66,7 +66,6 @@ skip_swagger='true'
 product_activedocs_cmd = 'curl -k -s -X POST -H "Content-Type: application/json" "https://' + admin_url + \
                                    '/admin/api/active_docs.json"' + \
                                     ' -d \'access_token=' + admin_accesstoken + '\'' + \
-
                                     ' --data-urlencode \'name=' + api_name + '\'' + \
                                     ' --data-urlencode \'service_id=' + service_id + '\'' + \
                                     ' --data-urlencode @\'body=' + apispec_filename + '\'' + \
