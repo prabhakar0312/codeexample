@@ -24,8 +24,8 @@ add_remote_cmd = '3scale -k remote add abg-cicd https://' + admin_accesstoken + 
 add_remote = subprocess.check_output(add_remote_cmd, shell=True, universal_newlines=True)
 
 #Create API Product
-apply_product_cmd = '3scale -k service apply ' + remote_name + ' ' + product_deploy_config["product_name"] + \
-									' -a oidc -n ' + product_deploy_config["product_name"]
+apply_product_cmd = '3scale -k service apply ' + remote_name + ' ' + product_deploy_config["product_system_name"] + \
+									' -a oidc -n ' + '' +product_deploy_config["product_name"] + ''
 apply_product = subprocess.check_output(apply_product_cmd, shell=True, universal_newlines=True)
 service_id = apply_product.split(":")[1].strip()
 print "Product Created =>" + service_id
