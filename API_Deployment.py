@@ -73,7 +73,7 @@ skip_swagger='true'
         #                            ' --data-urlencode \'system_name=' + api_systemname + '\'' + \
          #                           ' --data-urlencode \'skip_swagger_validations=' + skip_swagger + '\''
          
-         product_activedocs_cmd='3scale -k activedocs apply abg-cicd Promo --description='+api_desc+' --service-id='+str(service_id)+' --openapi-spec='+apispec_filename+' -p --name=Rentalstest'
+product_activedocs_cmd='3scale -k activedocs apply abg-cicd Promo --description=' + api_desc + ' --service-id=' + str(service_id) + ' --openapi-spec=' +apispec_filename + ' -p --name=Rentalstest'
                                     
 product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)  
 print "Product product_activedocs Command =>" + product_activedocs_cmd
