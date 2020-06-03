@@ -13,7 +13,6 @@ def readFile(filename):
 admin_accesstoken = '416989be027cf0866733113a199414993291dd5fa7e04e3dd6eca85fdcfe4e23'
 filename = sys.argv[1]
 policy_filename = sys.argv[2]
-apispec_filename = sys.argv[3]
 
 product_deploy_config=json.loads(readFile(filename))
 policy_config=json.loads(readFile(policy_filename))
@@ -55,9 +54,6 @@ product_proxy_cmd = 'curl -k -s -X PATCH "https://' + admin_url + \
                                   
 product_proxy = subprocess.check_output(product_proxy_cmd, shell=True, universal_newlines=True)
 print "Product Proxy Configuration Updated  =>" + service_id
-
-
-
 
 #Promote to Staging
 promote_staging_cmd= 'curl -k -s  -X POST "https://' + admin_url + \
