@@ -1,4 +1,6 @@
 {
+  "active_docs_configs": [
+    {
       "body": {
         "swagger": "2.0",
         "info": {
@@ -364,3 +366,5 @@
       "description": "swagger specification for profile API.",
       "skip_swagger_validations": false
     }
+  ]
+}
