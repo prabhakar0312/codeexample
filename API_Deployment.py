@@ -68,7 +68,6 @@ for activedocs_config in active_docs_configs["active_docs_configs"]:
     product_activedocs_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
                                        '/admin/api/active_docs.json"' + \
                                         ' -d \'access_token=' + admin_accesstoken + '\'' + \
-
                                         ' --data-urlencode \'name=' + activedocs_config["name"] + '\'' + \
                                         ' --data-urlencode \'service_id=' + service_id + '\'' + \
                                         ' --data-urlencode \'body=' + activedocs_config_spec + '\'' + \
