@@ -1,0 +1,366 @@
+{
+      "body": {
+        "swagger": "2.0",
+        "info": {
+          "title": "Avis Profile API",
+          "description": "System API that creates profile",
+          "version": "v1"
+        },
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "host": "profile-3scale-apicast-production.apps.api.abgapiservices.com:443",
+        "basePath": "/3pe/v1.0.0",
+        "securityDefinitions": {
+          "ABG-Access-Token": {
+            "flow": "application",
+            "type": "oauth2",
+            "tokenUrl": "https://oauth-3scale-apicast-production.apps.api.abgapiservices.com/oauth/token/v1"
+          }
+        },
+        "paths": {
+          "/profile": {
+            "x-amf-description": "Create profile details",
+            "post": {
+              "description": "Profile gets created for the given brandd",
+              "consumes": [
+                "application/json"
+              ],
+              "produces": [
+                "application/json"
+              ],
+              "parameters": [
+                {
+                  "name": "Content-Type",
+                  "required": false,
+                  "in": "header",
+                  "type": "string"
+                },
+                {
+                  "x-amf-mediaType": "application/json",
+                  "in": "body",
+                  "name": "generated",
+                  "schema": {
+                    "example": {
+                      "service_header": {
+                        "brand": "Avis"
+                      },
+                      "user": [
+                        {
+                          "profile": {
+                            "profile_type": "Basic",
+                            "corporate_profile": "Y",
+                            "first_name": "uma",
+                            "last_name": "pari",
+                            "email": "something@gmail.com",
+                            "date_of_birth": "22-09-1989"
+                          }
+                        }
+                      ],
+                      "address": {
+                        "address_line_1": "Cross line",
+                        "address_line_2": "4th block",
+                        "address_line_3": "",
+                        "city": "Auckland",
+                        "state_name": "AUK",
+                        "postal_code": "0622",
+                        "country_code": "NZ"
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "first_name": {
+                        "title": "The First_name Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "last_name": {
+                        "title": "The Last_name Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "middle_name": {
+                        "title": "The Middle_name Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "email": {
+                        "title": "The Email Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "country_of_residence": {
+                        "title": "The Country_of_residence Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "AWD": {
+                        "title": "The Awd Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "date_of_birth": {
+                        "title": "The Date_of_birth Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "telephone": {
+                        "title": "The Telephone Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "car_group_preference": {
+                        "title": "The Car_group_preference Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "company_name": {
+                        "title": "The Company_name Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "rental_options": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "properties": {
+                            "code": {
+                              "title": "The Code Schema ",
+                              "default": "",
+                              "type": "string"
+                            },
+                            "selected": {
+                              "title": "The Selected Schema ",
+                              "default": false,
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      },
+                      "make_model_pref_code": {
+                        "title": "The Make_model_pref_code Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "ereceipt": {
+                        "title": "The Ereceipt Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "promo_email": {
+                        "title": "The Promo_email Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "sms_message": {
+                        "title": "The Sms_message Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "push_message": {
+                        "title": "The Push_message Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "terms_accepted": {
+                        "title": "The Terms_accepted Schema ",
+                        "default": false,
+                        "type": "boolean"
+                      },
+                      "address": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                          "address_line_1": {
+                            "title": "The Address_line_1 Schema ",
+                            "default": "",
+                            "type": "string"
+                          },
+                          "address_line_2": {
+                            "title": "The Address_line_2 Schema ",
+                            "default": "",
+                            "type": "string"
+                          },
+                          "address_line_3": {
+                            "title": "The Address_line_3 Schema ",
+                            "default": "",
+                            "type": "string"
+                          },
+                          "city": {
+                            "title": "The City Schema ",
+                            "default": "",
+                            "type": "string"
+                          },
+                          "county": {
+                            "title": "The County Schema ",
+                            "default": "",
+                            "type": "string"
+                          },
+                          "province_name": {
+                            "title": "The Province_name Schema ",
+                            "default": "",
+                            "type": "string"
+                          },
+                          "postal_code": {
+                            "title": "The Postal_code Schema ",
+                            "default": "",
+                            "type": "string"
+                          },
+                          "country_code": {
+                            "title": "The Country_code Schema ",
+                            "default": "",
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "license_number": {
+                        "title": "The License_number Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "state": {
+                        "title": "The State Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "country": {
+                        "title": "The Country Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "source": {
+                        "title": "The Source Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "credit_card_type": {
+                        "title": "The Credit_card_type Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "credir_card_number": {
+                        "title": "The Credir_card_number Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "expiration_date": {
+                        "title": "The Expiration_date Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "cvv": {
+                        "title": "The Cvv Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "password_reminder_question": {
+                        "title": "The Password_reminder_question Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "password_reminder_answer": {
+                        "title": "The Password_reminder_answer Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "prefered_country": {
+                        "title": "The Prefered_country Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "prefered_language": {
+                        "title": "The Prefered_language Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "prefered_date_format": {
+                        "title": "The Prefered_date_format Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "prefered_time_format": {
+                        "title": "The Prefered_time_format Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "preference": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                          "dcc_preference": {
+                            "title": "The Dcc_preference Schema ",
+                            "default": "",
+                            "type": "string"
+                          },
+                          "loyalty_enrolled": {
+                            "title": "The Loyalty_enrolled Schema ",
+                            "default": "",
+                            "type": "string"
+                          },
+                          "preferred": {
+                            "title": "The Preferred Schema ",
+                            "default": false,
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "enroll_type": {
+                        "title": "The Enroll_type Schema ",
+                        "default": "",
+                        "type": "string"
+                      },
+                      "brand": {
+                        "title": "The Brand Schema ",
+                        "default": "AVIS",
+                        "enum": [
+                          "AVIS",
+                          "BUDGET"
+                        ],
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "",
+                  "x-amf-mediaType": "application/json",
+                  "schema": {
+                    "title": "C Location",
+                    "description": "Returns the profile creation results",
+                    "example": {
+                      "status": {
+                        "request_time": "2020-01-09T11:04:01Z",
+                        "success": [
+                          {
+                            "code": 201,
+                            "message": "Created",
+                            "details": "The resource was successfully created.",
+                            "wizardNum": "5CQ13X"
+                          }
+                        ]
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              },
+              "security": [
+                {
+                  "ABG-Access-Token": []
+                }
+              ]
+            }
+          }
+        }
+      },
+      "name": "Profile",
+      "system_name": "profile",
+      "description": "swagger specification for profile API.",
+      "skip_swagger_validations": false
+    }
