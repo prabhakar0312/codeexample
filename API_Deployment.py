@@ -59,7 +59,7 @@ print "Product Proxy Configuration Updated  =>" + service_id
 
 #Apply Product Active Docs
 #Apply Product Active Docs
-activedocs_config_spec=json.dumps(activedocs_config["body"]) 
+#activedocs_config_spec=json.dumps(activedocs_config["body"]) 
 
 for activedocs_config in active_docs_configs["active_docs_configs"]:
     
