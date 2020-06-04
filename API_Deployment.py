@@ -58,7 +58,7 @@ print "Product Proxy Configuration Updated  =>" + service_id
 
 #Apply Product Active Docs
 activedocs_cmd='3scale -k activedocs apply abg-cicd Promo --description='+activedocs_config["description"]+' --service-id='+str(service_id)+' --openapi-spec='+active_docs_filename+' -p --name=Rentalstest'                                        
-    product_activedocs = subprocess.check_output(activedocs_cmd, shell=True, universal_newlines=True)                                 
+product_activedocs = subprocess.check_output(activedocs_cmd, shell=True, universal_newlines=True)                                 
 print "Product Active docs added " + product_activedocs
 
 
