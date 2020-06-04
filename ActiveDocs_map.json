@@ -2,369 +2,3574 @@
   "active_docs_configs": [
     {
       "body": {
-        "swagger": "2.0",
-        "info": {
-          "title": "Avis Profile API",
-          "description": "System API that creates profile",
-          "version": "v1"
-        },
-        "schemes": [
-          "http",
-          "https"
-        ],
-        "host": "profile-3scale-apicast-production.apps.api.abgapiservices.com:443",
-        "basePath": "/3pe/v1.0.0",
-        "securityDefinitions": {
-          "ABG-Access-Token": {
-            "flow": "application",
-            "type": "oauth2",
-            "tokenUrl": "https://oauth-3scale-apicast-production.apps.api.abgapiservices.com/oauth/token/v1"
+  "swagger": "2.0",
+  "info": {
+    "title": "Loyalty",
+    "description": "### Loyalty\n\nThe Loyalty API enables mapping of partner loyalty and discount cards with associated ABG discounts codes and free options. The API also returns the best discount with the provided passenger(s) information when there is more than one passenger.",
+    "version": "v1"
+  },
+  "host": "partner-services-3scale-apicast-production.dev.apps.api-np.abgapiservices.com:443",
+  "basePath": "/loyalty/v1",
+  "securityDefinitions": {
+    "ABG-Access-Token": {
+      "flow": "application",
+      "type": "oauth2",
+      "tokenUrl": "https://oauth-3scale-apicast-production.dev.apps.api-np.abgapiservices.com/oauth/token/v1"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/partner": {
+      "x-amf-displayName": "Partner loyalty",
+      "x-amf-description": "Partner loyalty and ABG discount lookup data.",
+      "get": {
+        "operationId": "null_0",
+        "parameters": [
+          {
+            "name": "partner_code",
+            "required": true,
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "enum": [
+              "EN",
+              "ES",
+              "IT",
+              "DE",
+              "NL",
+              "FR"
+            ],
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2
+          },
+          {
+            "name": "channel",
+            "required": false,
+            "in": "query",
+            "enum": [
+              "website",
+              "mobile_app",
+              "agent_tool"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "transaction_id",
+            "required": false,
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "Your client identifier.",
+            "required": true,
+            "in": "header",
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 50
           }
-        },
-        "paths": {
-          "/profile": {
-            "x-amf-description": "Create profile details",
-            "post": {
-              "description": "Profile gets created for the given brandd",
-              "consumes": [
-                "application/json"
-              ],
-              "produces": [
-                "application/json"
-              ],
-              "parameters": [
-                {
-                  "name": "Content-Type",
-                  "required": false,
-                  "in": "header",
-                  "type": "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "Loyalty tier lookup information",
+              "description": "Partner loyalty and discount cards with associated ABG discounts codes and free options.",
+              "example": {
+                "status": {
+                  "request_time": "2018-10-25T12:01:54Z",
+                  "success": [
+                    {
+                      "code": "200",
+                      "message": "Success",
+                      "details": "Loyalty details are successfully retrieved."
+                    }
+                  ]
                 },
-                {
-                  "x-amf-mediaType": "application/json",
-                  "in": "body",
-                  "name": "generated",
-                  "schema": {
-                    "example": {
-                      "service_header": {
-                        "brand": "Avis"
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                },
+                "domain": {
+                  "language": "EN"
+                },
+                "loyalty_discounts": [
+                  {
+                    "rate_qualifiers": {
+                      "partner_loyalty": {
+                        "program": "SANS CARTE"
                       },
-                      "user": [
-                        {
-                          "profile": {
-                            "profile_type": "Basic",
-                            "corporate_profile": "Y",
-                            "first_name": "uma",
-                            "last_name": "pari",
-                            "email": "something@gmail.com",
-                            "date_of_birth": "22-09-1989"
-                          }
-                        }
-                      ],
-                      "address": {
-                        "address_line_1": "Cross line",
-                        "address_line_2": "4th block",
-                        "address_line_3": "",
-                        "city": "Auckland",
-                        "state_name": "AUK",
-                        "postal_code": "0622",
-                        "country_code": "NZ"
+                      "partner_discount": {
+                        "program": "SANS CARTE"
                       }
                     },
+                    "mapped_discounts": [
+                      {
+                        "brand": "Avis",
+                        "code": "X5212058",
+                        "percent": 10,
+                        "free_options": {
+                          "eligible_extras": {
+                            "quantity": 0
+                          }
+                        }
+                      },
+                      {
+                        "brand": "Budget",
+                        "code": "L824502",
+                        "percent": 10,
+                        "free_options": {
+                          "eligible_extras": {
+                            "quantity": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "rate_qualifiers": {
+                      "partner_loyalty": {
+                        "program": "VOYAGEUR"
+                      },
+                      "partner_discount": {
+                        "program": "SANS CARTE"
+                      }
+                    },
+                    "mapped_discounts": [
+                      {
+                        "brand": "Avis",
+                        "code": "X5212059",
+                        "percent": 15,
+                        "free_options": {
+                          "eligible_extras": {
+                            "quantity": 1
+                          },
+                          "eligible_codes": [
+                            "ADD",
+                            "GPS",
+                            "BBS",
+                            "CBS",
+                            "CSS",
+                            "SKR",
+                            "SNC"
+                          ]
+                        }
+                      },
+                      {
+                        "brand": "Budget",
+                        "code": "L824502",
+                        "percent": 15,
+                        "free_options": {
+                          "eligible_extras": {
+                            "quantity": 0
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "status",
+                "transaction",
+                "loyalty_discounts"
+              ],
+              "properties": {
+                "status": {
+                  "title": "Success status",
+                  "description": "Success Status object",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "success"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "success": {
+                      "title": "Success details",
+                      "description": "Success response metadata for all the rest APIs.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "description": "The HTTP status code value",
+                            "type": "string"
+                          },
+                          "message": {
+                            "description": "The HTTP status code message",
+                            "type": "string"
+                          },
+                          "details": {
+                            "description": "Description of the success status",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "domain": {
+                  "title": "Domain",
+                  "description": "Domain related information.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "language": {
+                      "enum": [
+                        "EN",
+                        "ES",
+                        "IT",
+                        "DE",
+                        "NL",
+                        "FR"
+                      ],
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 2
+                    },
+                    "channel": {
+                      "enum": [
+                        "website",
+                        "mobile_app",
+                        "agent_tool"
+                      ],
+                      "type": "string"
+                    }
+                  }
+                },
+                "loyalty_discounts": {
+                  "title": "Loyalty lookup",
+                  "description": "General loyalty lookup information. Acts as a passenger context on request. The response includes Mapped ABG discounts and best discount.",
+                  "type": "array",
+                  "items": {
                     "type": "object",
                     "additionalProperties": true,
+                    "required": [
+                      "rate_qualifiers"
+                    ],
                     "properties": {
-                      "first_name": {
-                        "title": "The First_name Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "last_name": {
-                        "title": "The Last_name Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "middle_name": {
-                        "title": "The Middle_name Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "email": {
-                        "title": "The Email Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "country_of_residence": {
-                        "title": "The Country_of_residence Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "AWD": {
-                        "title": "The Awd Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "date_of_birth": {
-                        "title": "The Date_of_birth Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "telephone": {
-                        "title": "The Telephone Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "car_group_preference": {
-                        "title": "The Car_group_preference Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "company_name": {
-                        "title": "The Company_name Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "rental_options": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "additionalProperties": true,
-                          "properties": {
-                            "code": {
-                              "title": "The Code Schema ",
-                              "default": "",
-                              "type": "string"
-                            },
-                            "selected": {
-                              "title": "The Selected Schema ",
-                              "default": false,
-                              "type": "boolean"
+                      "rate_qualifiers": {
+                        "title": "Reservation rate qualifiers",
+                        "description": "The information determines/influences the rate of the reservation in the localized currency.",
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                          "discount": {
+                            "title": "Brand Discounts",
+                            "description": "The rental vehicle brand rewards program code (also known as discount code) to be applied to the rate of the reservation.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "code"
+                            ],
+                            "properties": {
+                              "code": {
+                                "title": "Discount code",
+                                "description": "The rental vehicle brand discount code. This field can be an Avis Worldwide Discount (AWD), Budget Car Discount (BCD), or a Payless Discount Number (PDN) code.",
+                                "example": "R566100",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "loyalty": {
+                            "title": "Loyalty",
+                            "description": "Profile information of the user. The personal brand identification information of the user for the Avis, Budget, or Payless user profile.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                              "program": {
+                                "title": "Avis Budget Group loyalty program",
+                                "description": "The Avis Budget Group brand loyalty program name. The program can be an Avis Preferred, Avis Preferred Plus, Avis Platinum for Avis brand.",
+                                "example": "Avis Preferred Plus",
+                                "type": "string"
+                              },
+                              "code": {
+                                "title": "Loyalty code",
+                                "description": "The brand loyalty program code. This can be an Avis wizard number, Budget customer number, or Payless Perks number.",
+                                "example": "M2348934",
+                                "type": "string"
+                              },
+                              "brand": {
+                                "title": "Avis Budget Group brand",
+                                "description": "The brand associated with the loyalty program.",
+                                "enum": [
+                                  "Avis",
+                                  "Budget",
+                                  "Payless"
+                                ],
+                                "example": "Avis",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "coupon": {
+                            "title": "Coupon",
+                            "description": "Coupon infomation for reservation discounts and benefits.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "code"
+                            ],
+                            "properties": {
+                              "code": {
+                                "title": "Coupon code",
+                                "description": "The coupon code to be applied to the reservation rate.",
+                                "example": "MUZZ014",
+                                "type": "string"
+                              },
+                              "type": {
+                                "title": "Coupon type",
+                                "description": "The type of coupon that corresponds to the coupon code.",
+                                "enum": [
+                                  "MoneyOff",
+                                  "GasOff",
+                                  "DaysOff",
+                                  "Upgrade"
+                                ],
+                                "example": "MoneyOff",
+                                "type": "string"
+                              },
+                              "description": {
+                                "title": "Coupon description",
+                                "description": "Description of the coupon code that was specified in the request.",
+                                "example": "25USD Off with Rental of CSS/Paperless Coupon",
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "description": "The number of coupon codes to apply to the reservation.",
+                                "example": 1,
+                                "type": "number"
+                              },
+                              "coupon_applied": {
+                                "title": "Coupon applied flag",
+                                "description": "Indicates that a coupon code is valid and was successfully applied for the reservation.",
+                                "example": false,
+                                "type": "boolean"
+                              },
+                              "coupon_amount": {
+                                "title": "Coupon amount",
+                                "description": "The amount of the coupon discount applied to the cost of the reservation.",
+                                "example": 0,
+                                "type": "number"
+                              },
+                              "coupon_extras": {
+                                "title": "Coupon extras",
+                                "description": "The ancillary products tied to the coupon. For example, if the coupon code specified in the request applies to the cost of a child safety seat, then CSS will be returned in this field.",
+                                "type": "array",
+                                "items": {
+                                  "title": "Rental Extras",
+                                  "description": "The ancillary products, special equipment, and other extras selected as part of reservation.",
+                                  "type": "object",
+                                  "additionalProperties": true,
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "properties": {
+                                    "type": {
+                                      "title": "Extras type",
+                                      "description": "The type of ancillary product specified in the request. If a code of child safety seat (CSS) is specified in the request, then a value of SPEC_EQUIP will be returned in the response.",
+                                      "enum": [
+                                        "COUNTER_PROD",
+                                        "SPEC_EQUIP",
+                                        "UPSELL"
+                                      ],
+                                      "example": "COUNTER_PROD",
+                                      "type": "string"
+                                    },
+                                    "code": {
+                                      "title": "Extras code",
+                                      "description": "The rental ancillary code used to identify and add rental vehicle equipment and features to the reservation (such as GPS).",
+                                      "enum": [
+                                        "ADD",
+                                        "ADR",
+                                        "AFO",
+                                        "ATC",
+                                        "BBS",
+                                        "BKF",
+                                        "BKR",
+                                        "BXL",
+                                        "BXM",
+                                        "BXS",
+                                        "CBS",
+                                        "CCO",
+                                        "CCP",
+                                        "CFS",
+                                        "CHG",
+                                        "CIS",
+                                        "CNP",
+                                        "CSD",
+                                        "CSS",
+                                        "DCF",
+                                        "DEC",
+                                        "DIE",
+                                        "DIS",
+                                        "EPU",
+                                        "ESP",
+                                        "FRD",
+                                        "FSK",
+                                        "GEL",
+                                        "GPS",
+                                        "GSO",
+                                        "HDL",
+                                        "ICW",
+                                        "INC",
+                                        "IP5",
+                                        "IXB",
+                                        "MPG",
+                                        "NAV",
+                                        "NSF",
+                                        "PAC",
+                                        "RSN",
+                                        "SKI",
+                                        "SKR",
+                                        "SNC",
+                                        "SNW",
+                                        "STA",
+                                        "TAB",
+                                        "TCT",
+                                        "TPR",
+                                        "TRO",
+                                        "VCD",
+                                        "WFI",
+                                        "XMR",
+                                        "BAT",
+                                        "CSB"
+                                      ],
+                                      "example": "GPS",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Extras quantity",
+                                      "description": "The number of ancillary products to add to the reservation. For example, if a value of 2 is specified for quantity, and a code of CSS, then two child safety seats will be added to the reservation.",
+                                      "type": "number",
+                                      "minimum": 0.0
+                                    },
+                                    "amount": {
+                                      "title": "Extra product amount",
+                                      "description": "The price of the ancillary product.",
+                                      "example": 19.99,
+                                      "type": "number"
+                                    },
+                                    "total_owed": {
+                                      "title": "Total amount of the extra product",
+                                      "description": "The total price of the ancillary product for the entirety of the reservation period.",
+                                      "example": 65.0,
+                                      "type": "number"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "membership": {
+                            "title": "Frequent Traveler Programs (FTPs)",
+                            "description": "The Frequent Traveler Program (FTP) to be applied to the reservation. This entitles the user the opportunity to earn miles or points with ABG partners, such as airlines, hotels and other select companies. For example, the Lufthansa Miles & More Rewards Program. Surcharges may apply.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "code"
+                            ],
+                            "properties": {
+                              "code": {
+                                "title": "Frequent Traveler Program number",
+                                "description": "The unique Frequent Traveler Program (FTP) number of the traveler.",
+                                "example": "M21R322",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "age": {
+                            "title": "Age",
+                            "description": "Driver’s age. This might influence the rates. Will be superseded by date of birth found in the profile provided in “membership_code”.",
+                            "example": 25,
+                            "type": "number"
+                          },
+                          "date_of_birth": {
+                            "title": "Date of Birth",
+                            "description": "Driver’s date of birth. This might influence the rates. Will be superseded by “age” parameter or date of birth found in the profile provided in “membership_code”",
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "partner_loyalty": {
+                            "title": "Partner Loyalty",
+                            "description": "The partner loyalty discount program. The partner loyalty to be applied to drive the rate of booking.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                              "program": {
+                                "title": "Partner Program Name",
+                                "description": "Valid partner loyalty program from the user request, as agreed by partner integration.",
+                                "example": "Platinum",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "partner_discount": {
+                            "title": "Partner Discount",
+                            "description": "The partner commercial discount program. The discount to be applied to drive the rate of the booking. ",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                              "program": {
+                                "title": "Commercial Discount Name",
+                                "description": "Valid partner discount name from the user request, as agreed by partner integration.",
+                                "example": "VIP",
+                                "type": "string"
+                              }
                             }
                           }
                         }
                       },
-                      "make_model_pref_code": {
-                        "title": "The Make_model_pref_code Schema ",
-                        "default": "",
-                        "type": "string"
+                      "mapped_discounts": {
+                        "title": "Mapped discounts",
+                        "description": "Mapped Avis Budget Group discounts along with their free options.",
+                        "type": "array",
+                        "items": {
+                          "title": "Commercial discount",
+                          "description": "The commercial rental vehicle brand rewards program code (also known as discount code). The discounts applied to the rate of the reservation.",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "required": [
+                            "brand",
+                            "code"
+                          ],
+                          "properties": {
+                            "brand": {
+                              "title": "The Avis, Budget, or Payless brand name.",
+                              "description": "ABG supported brand names like Avis, Budget, or Payless..",
+                              "enum": [
+                                "Avis",
+                                "Budget",
+                                "Payless"
+                              ],
+                              "example": "Avis",
+                              "type": "string"
+                            },
+                            "code": {
+                              "title": "Discount code",
+                              "description": "The rental vehicle brand discount code. This field can be an Avis Worldwide Discount (AWD), Budget Car Discount (BCD), or a Payless Discount Number (PDN) code.",
+                              "example": "R566100",
+                              "type": "string"
+                            },
+                            "percent": {
+                              "title": "Discount percentage",
+                              "description": "The discount percentage applied to the reservation.",
+                              "type": "integer"
+                            },
+                            "free_options": {
+                              "title": "Free options",
+                              "description": "Eligible free ancillary products and benefits offered.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "eligible_extras"
+                              ],
+                              "properties": {
+                                "eligible_extras": {
+                                  "title": "Eligible extras",
+                                  "description": "Eligible ancillary products for selection.",
+                                  "type": "object",
+                                  "additionalProperties": true,
+                                  "properties": {
+                                    "quantity": {
+                                      "title": "Eligible extras quantity",
+                                      "description": "The total number of ancillary products.",
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "eligible_codes": {
+                                  "title": "Extra codes",
+                                  "description": "Eligible ancillary product codes.",
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Extras code",
+                                    "description": "The rental ancillary code used to identify and add rental vehicle equipment and features to the reservation (such as GPS).",
+                                    "enum": [
+                                      "ADD",
+                                      "ADR",
+                                      "AFO",
+                                      "ATC",
+                                      "BBS",
+                                      "BKF",
+                                      "BKR",
+                                      "BXL",
+                                      "BXM",
+                                      "BXS",
+                                      "CBS",
+                                      "CCO",
+                                      "CCP",
+                                      "CFS",
+                                      "CHG",
+                                      "CIS",
+                                      "CNP",
+                                      "CSD",
+                                      "CSS",
+                                      "DCF",
+                                      "DEC",
+                                      "DIE",
+                                      "DIS",
+                                      "EPU",
+                                      "ESP",
+                                      "FRD",
+                                      "FSK",
+                                      "GEL",
+                                      "GPS",
+                                      "GSO",
+                                      "HDL",
+                                      "ICW",
+                                      "INC",
+                                      "IP5",
+                                      "IXB",
+                                      "MPG",
+                                      "NAV",
+                                      "NSF",
+                                      "PAC",
+                                      "RSN",
+                                      "SKI",
+                                      "SKR",
+                                      "SNC",
+                                      "SNW",
+                                      "STA",
+                                      "TAB",
+                                      "TCT",
+                                      "TPR",
+                                      "TRO",
+                                      "VCD",
+                                      "WFI",
+                                      "XMR",
+                                      "BAT",
+                                      "CSB"
+                                    ],
+                                    "example": "GPS",
+                                    "type": "string"
+                                  }
+                                },
+                                "meet_and_greet": {
+                                  "title": "Meet and Greet",
+                                  "description": "Indicates the free meet and greet feature for the brand.",
+                                  "example": true,
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "pickup_date_range": {
+                              "title": "Pickup date range",
+                              "description": "Pickup date range for the eligibility of promotional discounts.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "to",
+                                "from"
+                              ],
+                              "properties": {
+                                "to": {
+                                  "title": "To date",
+                                  "description": "End date for the data range in ISO 8601 representation.",
+                                  "example": "2019-06-30T23:59:59Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "from": {
+                                  "title": "From date",
+                                  "description": "Start date for the date range ISO 8601 representation.",
+                                  "example": "2019-04-01T00:00:00Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            },
+                            "dropoff_date_range": {
+                              "title": "Dropoff date range",
+                              "description": "Dropoff date range for eligibility of the promotional discounts.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "to",
+                                "from"
+                              ],
+                              "properties": {
+                                "to": {
+                                  "title": "To date",
+                                  "description": "End date for the data range in ISO 8601 representation.",
+                                  "example": "2019-06-30T23:59:59Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "from": {
+                                  "title": "From date",
+                                  "description": "Start date for the date range ISO 8601 representation.",
+                                  "example": "2019-04-01T00:00:00Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            },
+                            "reservation_date_range": {
+                              "title": "Booking date range",
+                              "description": "Boking date range for the promotional discounts.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "to",
+                                "from"
+                              ],
+                              "properties": {
+                                "to": {
+                                  "title": "To date",
+                                  "description": "End date for the data range in ISO 8601 representation.",
+                                  "example": "2019-06-30T23:59:59Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "from": {
+                                  "title": "From date",
+                                  "description": "Start date for the date range ISO 8601 representation.",
+                                  "example": "2019-04-01T00:00:00Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            }
+                          }
+                        }
                       },
-                      "ereceipt": {
-                        "title": "The Ereceipt Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "promo_email": {
-                        "title": "The Promo_email Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "sms_message": {
-                        "title": "The Sms_message Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "push_message": {
-                        "title": "The Push_message Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "terms_accepted": {
-                        "title": "The Terms_accepted Schema ",
-                        "default": false,
+                      "best_discount": {
+                        "title": "Best discount",
+                        "description": "Represent the best discount with the provided passenger(s) information when there is more than one passenger.",
+                        "example": true,
                         "type": "boolean"
                       },
-                      "address": {
-                        "type": "object",
-                        "additionalProperties": true,
-                        "properties": {
-                          "address_line_1": {
-                            "title": "The Address_line_1 Schema ",
-                            "default": "",
-                            "type": "string"
-                          },
-                          "address_line_2": {
-                            "title": "The Address_line_2 Schema ",
-                            "default": "",
-                            "type": "string"
-                          },
-                          "address_line_3": {
-                            "title": "The Address_line_3 Schema ",
-                            "default": "",
-                            "type": "string"
-                          },
-                          "city": {
-                            "title": "The City Schema ",
-                            "default": "",
-                            "type": "string"
-                          },
-                          "county": {
-                            "title": "The County Schema ",
-                            "default": "",
-                            "type": "string"
-                          },
-                          "province_name": {
-                            "title": "The Province_name Schema ",
-                            "default": "",
-                            "type": "string"
-                          },
-                          "postal_code": {
-                            "title": "The Postal_code Schema ",
-                            "default": "",
-                            "type": "string"
-                          },
-                          "country_code": {
-                            "title": "The Country_code Schema ",
-                            "default": "",
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "license_number": {
-                        "title": "The License_number Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "state": {
-                        "title": "The State Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "country": {
-                        "title": "The Country Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "source": {
-                        "title": "The Source Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "credit_card_type": {
-                        "title": "The Credit_card_type Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "credir_card_number": {
-                        "title": "The Credir_card_number Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "expiration_date": {
-                        "title": "The Expiration_date Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "cvv": {
-                        "title": "The Cvv Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "password_reminder_question": {
-                        "title": "The Password_reminder_question Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "password_reminder_answer": {
-                        "title": "The Password_reminder_answer Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "prefered_country": {
-                        "title": "The Prefered_country Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "prefered_language": {
-                        "title": "The Prefered_language Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "prefered_date_format": {
-                        "title": "The Prefered_date_format Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "prefered_time_format": {
-                        "title": "The Prefered_time_format Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "preference": {
-                        "type": "object",
-                        "additionalProperties": true,
-                        "properties": {
-                          "dcc_preference": {
-                            "title": "The Dcc_preference Schema ",
-                            "default": "",
-                            "type": "string"
-                          },
-                          "loyalty_enrolled": {
-                            "title": "The Loyalty_enrolled Schema ",
-                            "default": "",
-                            "type": "string"
-                          },
-                          "preferred": {
-                            "title": "The Preferred Schema ",
-                            "default": false,
-                            "type": "boolean"
-                          }
-                        }
-                      },
-                      "enroll_type": {
-                        "title": "The Enroll_type Schema ",
-                        "default": "",
-                        "type": "string"
-                      },
-                      "brand": {
-                        "title": "The Brand Schema ",
-                        "default": "AVIS",
+                      "driver": {
+                        "title": "Driver of the vehicle",
+                        "description": "Indicator to represent the primary or secondary driver of the vehicle.",
                         "enum": [
-                          "AVIS",
-                          "BUDGET"
+                          "primary",
+                          "secondary"
                         ],
+                        "example": "primary",
                         "type": "string"
                       }
                     }
                   }
                 }
-              ],
-              "responses": {
-                "200": {
-                  "description": "",
-                  "x-amf-mediaType": "application/json",
-                  "schema": {
-                    "title": "C Location",
-                    "description": "Returns the profile creation results",
-                    "example": {
-                      "status": {
-                        "request_time": "2020-01-09T11:04:01Z",
-                        "success": [
-                          {
-                            "code": 201,
-                            "message": "Created",
-                            "details": "The resource was successfully created.",
-                            "wizardNum": "5CQ13X"
-                          }
-                        ]
-                      }
-                    },
-                    "type": "object",
-                    "additionalProperties": true
-                  }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request is returned when the request could not be understood by the server. 400 includes missing required values, invalid data types, minimum/maximum values, ranges and format.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "400 Bad Request",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "400",
+                      "message": "Bad request",
+                      "reason": "invalid_request",
+                      "details": "Specified parameter <parameter name> is not valid"
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
                 }
               },
-              "security": [
-                {
-                  "ABG-Access-Token": []
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
-              ]
+              }
+            }
+          },
+          "404": {
+            "description": "404 Not Found is returned when server cannot find the matching request URI (either due to no results, or because of a non-existent endpoint or resource). Server may also respond with this status code when there is 401 or 403, which the service wants to mask for security reasons.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "404 Not Found",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "404",
+                      "message": "Resource not found",
+                      "reason": "resource_failure",
+                      "details": "Server cannot find the requested resource. This may be due to incorrect URI or a resource that is not available."
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "A request method is not supported for the requested resource; for example, a GET request on a form that requires data to be presented via POST, or a PUT request on a read-only resource.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "405 Method Not Allowed",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "405",
+                      "message": "Method not allowed",
+                      "reason": "invalid_request",
+                      "details": "Invalid HTTP message"
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "The requested resource is capable of generating only content not acceptable according to the Accept headers sent in the request.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "406 Not Accecptable",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "406",
+                      "message": "Invalid content type",
+                      "reason": "not_accecptable",
+                      "details": "Invalid content type in the request payload"
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "The request entity has a media type which the server or resource does not support. For example, the client uploads an image as image/svg+xml, but the server requires that images use a different format.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "415 Unsupported Media Type",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "415",
+                      "message": "Unsupported media type",
+                      "reason": "unsupported media type",
+                      "details": ""
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500 Internal Server Error is returned when a system or application error has occurred. It generally indicates that something unexpected has gone wrong on the server. This is used for a standard server side exception for a persistent error on the server side.        \n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "500 Internal Server Error",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "500",
+                      "message": "Service exception",
+                      "reason": "System exception from e-com backend.",
+                      "details": "System Exception occurred. Please check the log for details."
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
-        }
-      },
-      "name": "Profile",
-      "system_name": "profile",
-      "description": "swagger specification for profile API.",
-      "skip_swagger_validations": false
+        },
+        "security": [
+          {
+            "ABG-Access-Token": []
+          }
+        ]
+      }
+    },
+    "/partner/program": {
+      "x-amf-displayName": "Partner loyalty program",
+      "x-amf-description": "Obtain the ABG discount codes for partner loyalty program and merchant discounts.",
+      "post": {
+        "operationId": "null_1",
+        "parameters": [
+          {
+            "name": "client_id",
+            "description": "Your client identifier.",
+            "required": true,
+            "in": "header",
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 50
+          },
+          {
+            "x-amf-mediaType": "application/json",
+            "in": "body",
+            "name": "generated",
+            "schema": {
+              "title": "Partner loyalty and discounts",
+              "description": "Commercially agreed partner loyalties and discounts to be sent in the request.",
+              "example": {
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                },
+                "partner": {
+                  "code": "SNCF"
+                },
+                "domain": {
+                  "language": "EN",
+                  "channel": "website"
+                },
+                "loyalty_discounts": [
+                  {
+                    "rate_qualifiers": {
+                      "partner_loyalty": {
+                        "program": "Voyageur"
+                      },
+                      "partner_discount": {
+                        "program": "Carte Jeune"
+                      }
+                    },
+                    "driver": "primary"
+                  },
+                  {
+                    "rate_qualifiers": {
+                      "partner_loyalty": {
+                        "program": "GRAND VOYAGEUR LE CLUB"
+                      },
+                      "partner_discount": {
+                        "program": "Carte Jeune"
+                      }
+                    },
+                    "driver": "secondary"
+                  }
+                ]
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "partner",
+                "loyalty_discounts"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "partner": {
+                  "title": "Partner information",
+                  "description": "Travel partner information.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "code"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "title": "Partner name",
+                      "description": "The organization or entity name registered and obtained through partner onboarding process.",
+                      "example": "SNCF",
+                      "type": "string"
+                    },
+                    "iata_number": {
+                      "title": "Partner IATA number",
+                      "description": "International Air Transport Association (IATA) number. This is an identifier used by travel agents that allows the rental car company to pay the agent a commission for the rental.",
+                      "example": "91212019",
+                      "type": "string"
+                    }
+                  }
+                },
+                "domain": {
+                  "title": "Domain",
+                  "description": "Domain related information.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "language": {
+                      "enum": [
+                        "EN",
+                        "ES",
+                        "IT",
+                        "DE",
+                        "NL",
+                        "FR"
+                      ],
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 2
+                    },
+                    "channel": {
+                      "enum": [
+                        "website",
+                        "mobile_app",
+                        "agent_tool"
+                      ],
+                      "type": "string"
+                    }
+                  }
+                },
+                "loyalty_discounts": {
+                  "title": "Loyalty lookup",
+                  "description": "General loyalty lookup information. Acts as a passenger context on request. The response includes Mapped ABG discounts and best discount.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "required": [
+                      "rate_qualifiers"
+                    ],
+                    "properties": {
+                      "rate_qualifiers": {
+                        "title": "Reservation rate qualifiers",
+                        "description": "The information determines/influences the rate of the reservation in the localized currency.",
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                          "discount": {
+                            "title": "Brand Discounts",
+                            "description": "The rental vehicle brand rewards program code (also known as discount code) to be applied to the rate of the reservation.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "code"
+                            ],
+                            "properties": {
+                              "code": {
+                                "title": "Discount code",
+                                "description": "The rental vehicle brand discount code. This field can be an Avis Worldwide Discount (AWD), Budget Car Discount (BCD), or a Payless Discount Number (PDN) code.",
+                                "example": "R566100",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "loyalty": {
+                            "title": "Loyalty",
+                            "description": "Profile information of the user. The personal brand identification information of the user for the Avis, Budget, or Payless user profile.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                              "program": {
+                                "title": "Avis Budget Group loyalty program",
+                                "description": "The Avis Budget Group brand loyalty program name. The program can be an Avis Preferred, Avis Preferred Plus, Avis Platinum for Avis brand.",
+                                "example": "Avis Preferred Plus",
+                                "type": "string"
+                              },
+                              "code": {
+                                "title": "Loyalty code",
+                                "description": "The brand loyalty program code. This can be an Avis wizard number, Budget customer number, or Payless Perks number.",
+                                "example": "M2348934",
+                                "type": "string"
+                              },
+                              "brand": {
+                                "title": "Avis Budget Group brand",
+                                "description": "The brand associated with the loyalty program.",
+                                "enum": [
+                                  "Avis",
+                                  "Budget",
+                                  "Payless"
+                                ],
+                                "example": "Avis",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "coupon": {
+                            "title": "Coupon",
+                            "description": "Coupon infomation for reservation discounts and benefits.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "code"
+                            ],
+                            "properties": {
+                              "code": {
+                                "title": "Coupon code",
+                                "description": "The coupon code to be applied to the reservation rate.",
+                                "example": "MUZZ014",
+                                "type": "string"
+                              },
+                              "type": {
+                                "title": "Coupon type",
+                                "description": "The type of coupon that corresponds to the coupon code.",
+                                "enum": [
+                                  "MoneyOff",
+                                  "GasOff",
+                                  "DaysOff",
+                                  "Upgrade"
+                                ],
+                                "example": "MoneyOff",
+                                "type": "string"
+                              },
+                              "description": {
+                                "title": "Coupon description",
+                                "description": "Description of the coupon code that was specified in the request.",
+                                "example": "25USD Off with Rental of CSS/Paperless Coupon",
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "description": "The number of coupon codes to apply to the reservation.",
+                                "example": 1,
+                                "type": "number"
+                              },
+                              "coupon_applied": {
+                                "title": "Coupon applied flag",
+                                "description": "Indicates that a coupon code is valid and was successfully applied for the reservation.",
+                                "example": false,
+                                "type": "boolean"
+                              },
+                              "coupon_amount": {
+                                "title": "Coupon amount",
+                                "description": "The amount of the coupon discount applied to the cost of the reservation.",
+                                "example": 0,
+                                "type": "number"
+                              },
+                              "coupon_extras": {
+                                "title": "Coupon extras",
+                                "description": "The ancillary products tied to the coupon. For example, if the coupon code specified in the request applies to the cost of a child safety seat, then CSS will be returned in this field.",
+                                "type": "array",
+                                "items": {
+                                  "title": "Rental Extras",
+                                  "description": "The ancillary products, special equipment, and other extras selected as part of reservation.",
+                                  "type": "object",
+                                  "additionalProperties": true,
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "properties": {
+                                    "type": {
+                                      "title": "Extras type",
+                                      "description": "The type of ancillary product specified in the request. If a code of child safety seat (CSS) is specified in the request, then a value of SPEC_EQUIP will be returned in the response.",
+                                      "enum": [
+                                        "COUNTER_PROD",
+                                        "SPEC_EQUIP",
+                                        "UPSELL"
+                                      ],
+                                      "example": "COUNTER_PROD",
+                                      "type": "string"
+                                    },
+                                    "code": {
+                                      "title": "Extras code",
+                                      "description": "The rental ancillary code used to identify and add rental vehicle equipment and features to the reservation (such as GPS).",
+                                      "enum": [
+                                        "ADD",
+                                        "ADR",
+                                        "AFO",
+                                        "ATC",
+                                        "BBS",
+                                        "BKF",
+                                        "BKR",
+                                        "BXL",
+                                        "BXM",
+                                        "BXS",
+                                        "CBS",
+                                        "CCO",
+                                        "CCP",
+                                        "CFS",
+                                        "CHG",
+                                        "CIS",
+                                        "CNP",
+                                        "CSD",
+                                        "CSS",
+                                        "DCF",
+                                        "DEC",
+                                        "DIE",
+                                        "DIS",
+                                        "EPU",
+                                        "ESP",
+                                        "FRD",
+                                        "FSK",
+                                        "GEL",
+                                        "GPS",
+                                        "GSO",
+                                        "HDL",
+                                        "ICW",
+                                        "INC",
+                                        "IP5",
+                                        "IXB",
+                                        "MPG",
+                                        "NAV",
+                                        "NSF",
+                                        "PAC",
+                                        "RSN",
+                                        "SKI",
+                                        "SKR",
+                                        "SNC",
+                                        "SNW",
+                                        "STA",
+                                        "TAB",
+                                        "TCT",
+                                        "TPR",
+                                        "TRO",
+                                        "VCD",
+                                        "WFI",
+                                        "XMR",
+                                        "BAT",
+                                        "CSB"
+                                      ],
+                                      "example": "GPS",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Extras quantity",
+                                      "description": "The number of ancillary products to add to the reservation. For example, if a value of 2 is specified for quantity, and a code of CSS, then two child safety seats will be added to the reservation.",
+                                      "type": "number",
+                                      "minimum": 0.0
+                                    },
+                                    "amount": {
+                                      "title": "Extra product amount",
+                                      "description": "The price of the ancillary product.",
+                                      "example": 19.99,
+                                      "type": "number"
+                                    },
+                                    "total_owed": {
+                                      "title": "Total amount of the extra product",
+                                      "description": "The total price of the ancillary product for the entirety of the reservation period.",
+                                      "example": 65.0,
+                                      "type": "number"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "membership": {
+                            "title": "Frequent Traveler Programs (FTPs)",
+                            "description": "The Frequent Traveler Program (FTP) to be applied to the reservation. This entitles the user the opportunity to earn miles or points with ABG partners, such as airlines, hotels and other select companies. For example, the Lufthansa Miles & More Rewards Program. Surcharges may apply.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "code"
+                            ],
+                            "properties": {
+                              "code": {
+                                "title": "Frequent Traveler Program number",
+                                "description": "The unique Frequent Traveler Program (FTP) number of the traveler.",
+                                "example": "M21R322",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "age": {
+                            "title": "Age",
+                            "description": "Driver’s age. This might influence the rates. Will be superseded by date of birth found in the profile provided in “membership_code”.",
+                            "example": 25,
+                            "type": "number"
+                          },
+                          "date_of_birth": {
+                            "title": "Date of Birth",
+                            "description": "Driver’s date of birth. This might influence the rates. Will be superseded by “age” parameter or date of birth found in the profile provided in “membership_code”",
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "partner_loyalty": {
+                            "title": "Partner Loyalty",
+                            "description": "The partner loyalty discount program. The partner loyalty to be applied to drive the rate of booking.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                              "program": {
+                                "title": "Partner Program Name",
+                                "description": "Valid partner loyalty program from the user request, as agreed by partner integration.",
+                                "example": "Platinum",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "partner_discount": {
+                            "title": "Partner Discount",
+                            "description": "The partner commercial discount program. The discount to be applied to drive the rate of the booking. ",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                              "program": {
+                                "title": "Commercial Discount Name",
+                                "description": "Valid partner discount name from the user request, as agreed by partner integration.",
+                                "example": "VIP",
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "mapped_discounts": {
+                        "title": "Mapped discounts",
+                        "description": "Mapped Avis Budget Group discounts along with their free options.",
+                        "type": "array",
+                        "items": {
+                          "title": "Commercial discount",
+                          "description": "The commercial rental vehicle brand rewards program code (also known as discount code). The discounts applied to the rate of the reservation.",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "required": [
+                            "brand",
+                            "code"
+                          ],
+                          "properties": {
+                            "brand": {
+                              "title": "The Avis, Budget, or Payless brand name.",
+                              "description": "ABG supported brand names like Avis, Budget, or Payless..",
+                              "enum": [
+                                "Avis",
+                                "Budget",
+                                "Payless"
+                              ],
+                              "example": "Avis",
+                              "type": "string"
+                            },
+                            "code": {
+                              "title": "Discount code",
+                              "description": "The rental vehicle brand discount code. This field can be an Avis Worldwide Discount (AWD), Budget Car Discount (BCD), or a Payless Discount Number (PDN) code.",
+                              "example": "R566100",
+                              "type": "string"
+                            },
+                            "percent": {
+                              "title": "Discount percentage",
+                              "description": "The discount percentage applied to the reservation.",
+                              "type": "integer"
+                            },
+                            "free_options": {
+                              "title": "Free options",
+                              "description": "Eligible free ancillary products and benefits offered.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "eligible_extras"
+                              ],
+                              "properties": {
+                                "eligible_extras": {
+                                  "title": "Eligible extras",
+                                  "description": "Eligible ancillary products for selection.",
+                                  "type": "object",
+                                  "additionalProperties": true,
+                                  "properties": {
+                                    "quantity": {
+                                      "title": "Eligible extras quantity",
+                                      "description": "The total number of ancillary products.",
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "eligible_codes": {
+                                  "title": "Extra codes",
+                                  "description": "Eligible ancillary product codes.",
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Extras code",
+                                    "description": "The rental ancillary code used to identify and add rental vehicle equipment and features to the reservation (such as GPS).",
+                                    "enum": [
+                                      "ADD",
+                                      "ADR",
+                                      "AFO",
+                                      "ATC",
+                                      "BBS",
+                                      "BKF",
+                                      "BKR",
+                                      "BXL",
+                                      "BXM",
+                                      "BXS",
+                                      "CBS",
+                                      "CCO",
+                                      "CCP",
+                                      "CFS",
+                                      "CHG",
+                                      "CIS",
+                                      "CNP",
+                                      "CSD",
+                                      "CSS",
+                                      "DCF",
+                                      "DEC",
+                                      "DIE",
+                                      "DIS",
+                                      "EPU",
+                                      "ESP",
+                                      "FRD",
+                                      "FSK",
+                                      "GEL",
+                                      "GPS",
+                                      "GSO",
+                                      "HDL",
+                                      "ICW",
+                                      "INC",
+                                      "IP5",
+                                      "IXB",
+                                      "MPG",
+                                      "NAV",
+                                      "NSF",
+                                      "PAC",
+                                      "RSN",
+                                      "SKI",
+                                      "SKR",
+                                      "SNC",
+                                      "SNW",
+                                      "STA",
+                                      "TAB",
+                                      "TCT",
+                                      "TPR",
+                                      "TRO",
+                                      "VCD",
+                                      "WFI",
+                                      "XMR",
+                                      "BAT",
+                                      "CSB"
+                                    ],
+                                    "example": "GPS",
+                                    "type": "string"
+                                  }
+                                },
+                                "meet_and_greet": {
+                                  "title": "Meet and Greet",
+                                  "description": "Indicates the free meet and greet feature for the brand.",
+                                  "example": true,
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "pickup_date_range": {
+                              "title": "Pickup date range",
+                              "description": "Pickup date range for the eligibility of promotional discounts.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "to",
+                                "from"
+                              ],
+                              "properties": {
+                                "to": {
+                                  "title": "To date",
+                                  "description": "End date for the data range in ISO 8601 representation.",
+                                  "example": "2019-06-30T23:59:59Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "from": {
+                                  "title": "From date",
+                                  "description": "Start date for the date range ISO 8601 representation.",
+                                  "example": "2019-04-01T00:00:00Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            },
+                            "dropoff_date_range": {
+                              "title": "Dropoff date range",
+                              "description": "Dropoff date range for eligibility of the promotional discounts.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "to",
+                                "from"
+                              ],
+                              "properties": {
+                                "to": {
+                                  "title": "To date",
+                                  "description": "End date for the data range in ISO 8601 representation.",
+                                  "example": "2019-06-30T23:59:59Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "from": {
+                                  "title": "From date",
+                                  "description": "Start date for the date range ISO 8601 representation.",
+                                  "example": "2019-04-01T00:00:00Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            },
+                            "reservation_date_range": {
+                              "title": "Booking date range",
+                              "description": "Boking date range for the promotional discounts.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "to",
+                                "from"
+                              ],
+                              "properties": {
+                                "to": {
+                                  "title": "To date",
+                                  "description": "End date for the data range in ISO 8601 representation.",
+                                  "example": "2019-06-30T23:59:59Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "from": {
+                                  "title": "From date",
+                                  "description": "Start date for the date range ISO 8601 representation.",
+                                  "example": "2019-04-01T00:00:00Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "best_discount": {
+                        "title": "Best discount",
+                        "description": "Represent the best discount with the provided passenger(s) information when there is more than one passenger.",
+                        "example": true,
+                        "type": "boolean"
+                      },
+                      "driver": {
+                        "title": "Driver of the vehicle",
+                        "description": "Indicator to represent the primary or secondary driver of the vehicle.",
+                        "enum": [
+                          "primary",
+                          "secondary"
+                        ],
+                        "example": "primary",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "Loyalty Discount details",
+              "description": "All the available Discounts and free extra product details for Avis Budget Group vehicles which are applicable to passengers loyalty cards.",
+              "example": {
+                "status": {
+                  "request_time": "2018-10-25T12:01:54Z",
+                  "success": [
+                    {
+                      "code": "200",
+                      "message": "Success",
+                      "details": "Loyalty details are successfully retrieved."
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                },
+                "domain": {
+                  "language": "EN"
+                },
+                "loyalty_discounts": [
+                  {
+                    "rate_qualifiers": {
+                      "partner_loyalty": {
+                        "program": "Voyageur"
+                      },
+                      "partner_discount": {
+                        "program": "San carte"
+                      }
+                    },
+                    "mapped_discounts": [
+                      {
+                        "brand": "Avis",
+                        "code": "X5212064",
+                        "percent": 15,
+                        "free_options": {
+                          "eligible_extras": {
+                            "quantity": 1
+                          },
+                          "eligible_codes": [
+                            "ADD",
+                            "GPS",
+                            "BBS",
+                            "CBS",
+                            "CSS",
+                            "SKR",
+                            "SNC"
+                          ]
+                        }
+                      },
+                      {
+                        "brand": "Budget",
+                        "code": "L824502",
+                        "percent": 10,
+                        "free_options": {
+                          "eligible_extras": {
+                            "quantity": 0
+                          }
+                        }
+                      }
+                    ],
+                    "best_discount": true
+                  },
+                  {
+                    "rate_qualifiers": {
+                      "partner_loyalty": {
+                        "program": "GRAND VOYAGEUR LE CLUB"
+                      },
+                      "partner_discount": {
+                        "program": "Carte Jeune"
+                      }
+                    },
+                    "mapped_discounts": [
+                      {
+                        "brand": "Avis",
+                        "code": "X5212067",
+                        "percent": 10,
+                        "free_options": {
+                          "eligible_extras": {
+                            "quantity": 1
+                          },
+                          "eligible_codes": [
+                            "ADD",
+                            "GPS",
+                            "BBS",
+                            "CBS",
+                            "CSS",
+                            "SKR",
+                            "SNC"
+                          ]
+                        }
+                      },
+                      {
+                        "brand": "Budget",
+                        "code": "L824502",
+                        "percent": 10,
+                        "free_options": {
+                          "eligible_extras": {
+                            "quantity": 0
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "status",
+                "transaction",
+                "loyalty_discounts"
+              ],
+              "properties": {
+                "status": {
+                  "title": "Success status",
+                  "description": "Success Status object",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "success"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "success": {
+                      "title": "Success details",
+                      "description": "Success response metadata for all the rest APIs.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "description": "The HTTP status code value",
+                            "type": "string"
+                          },
+                          "message": {
+                            "description": "The HTTP status code message",
+                            "type": "string"
+                          },
+                          "details": {
+                            "description": "Description of the success status",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "domain": {
+                  "title": "Domain",
+                  "description": "Domain related information.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "language": {
+                      "enum": [
+                        "EN",
+                        "ES",
+                        "IT",
+                        "DE",
+                        "NL",
+                        "FR"
+                      ],
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 2
+                    },
+                    "channel": {
+                      "enum": [
+                        "website",
+                        "mobile_app",
+                        "agent_tool"
+                      ],
+                      "type": "string"
+                    }
+                  }
+                },
+                "loyalty_discounts": {
+                  "title": "Loyalty lookup",
+                  "description": "General loyalty lookup information. Acts as a passenger context on request. The response includes Mapped ABG discounts and best discount.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "required": [
+                      "rate_qualifiers"
+                    ],
+                    "properties": {
+                      "rate_qualifiers": {
+                        "title": "Reservation rate qualifiers",
+                        "description": "The information determines/influences the rate of the reservation in the localized currency.",
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                          "discount": {
+                            "title": "Brand Discounts",
+                            "description": "The rental vehicle brand rewards program code (also known as discount code) to be applied to the rate of the reservation.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "code"
+                            ],
+                            "properties": {
+                              "code": {
+                                "title": "Discount code",
+                                "description": "The rental vehicle brand discount code. This field can be an Avis Worldwide Discount (AWD), Budget Car Discount (BCD), or a Payless Discount Number (PDN) code.",
+                                "example": "R566100",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "loyalty": {
+                            "title": "Loyalty",
+                            "description": "Profile information of the user. The personal brand identification information of the user for the Avis, Budget, or Payless user profile.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                              "program": {
+                                "title": "Avis Budget Group loyalty program",
+                                "description": "The Avis Budget Group brand loyalty program name. The program can be an Avis Preferred, Avis Preferred Plus, Avis Platinum for Avis brand.",
+                                "example": "Avis Preferred Plus",
+                                "type": "string"
+                              },
+                              "code": {
+                                "title": "Loyalty code",
+                                "description": "The brand loyalty program code. This can be an Avis wizard number, Budget customer number, or Payless Perks number.",
+                                "example": "M2348934",
+                                "type": "string"
+                              },
+                              "brand": {
+                                "title": "Avis Budget Group brand",
+                                "description": "The brand associated with the loyalty program.",
+                                "enum": [
+                                  "Avis",
+                                  "Budget",
+                                  "Payless"
+                                ],
+                                "example": "Avis",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "coupon": {
+                            "title": "Coupon",
+                            "description": "Coupon infomation for reservation discounts and benefits.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "code"
+                            ],
+                            "properties": {
+                              "code": {
+                                "title": "Coupon code",
+                                "description": "The coupon code to be applied to the reservation rate.",
+                                "example": "MUZZ014",
+                                "type": "string"
+                              },
+                              "type": {
+                                "title": "Coupon type",
+                                "description": "The type of coupon that corresponds to the coupon code.",
+                                "enum": [
+                                  "MoneyOff",
+                                  "GasOff",
+                                  "DaysOff",
+                                  "Upgrade"
+                                ],
+                                "example": "MoneyOff",
+                                "type": "string"
+                              },
+                              "description": {
+                                "title": "Coupon description",
+                                "description": "Description of the coupon code that was specified in the request.",
+                                "example": "25USD Off with Rental of CSS/Paperless Coupon",
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "description": "The number of coupon codes to apply to the reservation.",
+                                "example": 1,
+                                "type": "number"
+                              },
+                              "coupon_applied": {
+                                "title": "Coupon applied flag",
+                                "description": "Indicates that a coupon code is valid and was successfully applied for the reservation.",
+                                "example": false,
+                                "type": "boolean"
+                              },
+                              "coupon_amount": {
+                                "title": "Coupon amount",
+                                "description": "The amount of the coupon discount applied to the cost of the reservation.",
+                                "example": 0,
+                                "type": "number"
+                              },
+                              "coupon_extras": {
+                                "title": "Coupon extras",
+                                "description": "The ancillary products tied to the coupon. For example, if the coupon code specified in the request applies to the cost of a child safety seat, then CSS will be returned in this field.",
+                                "type": "array",
+                                "items": {
+                                  "title": "Rental Extras",
+                                  "description": "The ancillary products, special equipment, and other extras selected as part of reservation.",
+                                  "type": "object",
+                                  "additionalProperties": true,
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "properties": {
+                                    "type": {
+                                      "title": "Extras type",
+                                      "description": "The type of ancillary product specified in the request. If a code of child safety seat (CSS) is specified in the request, then a value of SPEC_EQUIP will be returned in the response.",
+                                      "enum": [
+                                        "COUNTER_PROD",
+                                        "SPEC_EQUIP",
+                                        "UPSELL"
+                                      ],
+                                      "example": "COUNTER_PROD",
+                                      "type": "string"
+                                    },
+                                    "code": {
+                                      "title": "Extras code",
+                                      "description": "The rental ancillary code used to identify and add rental vehicle equipment and features to the reservation (such as GPS).",
+                                      "enum": [
+                                        "ADD",
+                                        "ADR",
+                                        "AFO",
+                                        "ATC",
+                                        "BBS",
+                                        "BKF",
+                                        "BKR",
+                                        "BXL",
+                                        "BXM",
+                                        "BXS",
+                                        "CBS",
+                                        "CCO",
+                                        "CCP",
+                                        "CFS",
+                                        "CHG",
+                                        "CIS",
+                                        "CNP",
+                                        "CSD",
+                                        "CSS",
+                                        "DCF",
+                                        "DEC",
+                                        "DIE",
+                                        "DIS",
+                                        "EPU",
+                                        "ESP",
+                                        "FRD",
+                                        "FSK",
+                                        "GEL",
+                                        "GPS",
+                                        "GSO",
+                                        "HDL",
+                                        "ICW",
+                                        "INC",
+                                        "IP5",
+                                        "IXB",
+                                        "MPG",
+                                        "NAV",
+                                        "NSF",
+                                        "PAC",
+                                        "RSN",
+                                        "SKI",
+                                        "SKR",
+                                        "SNC",
+                                        "SNW",
+                                        "STA",
+                                        "TAB",
+                                        "TCT",
+                                        "TPR",
+                                        "TRO",
+                                        "VCD",
+                                        "WFI",
+                                        "XMR",
+                                        "BAT",
+                                        "CSB"
+                                      ],
+                                      "example": "GPS",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Extras quantity",
+                                      "description": "The number of ancillary products to add to the reservation. For example, if a value of 2 is specified for quantity, and a code of CSS, then two child safety seats will be added to the reservation.",
+                                      "type": "number",
+                                      "minimum": 0.0
+                                    },
+                                    "amount": {
+                                      "title": "Extra product amount",
+                                      "description": "The price of the ancillary product.",
+                                      "example": 19.99,
+                                      "type": "number"
+                                    },
+                                    "total_owed": {
+                                      "title": "Total amount of the extra product",
+                                      "description": "The total price of the ancillary product for the entirety of the reservation period.",
+                                      "example": 65.0,
+                                      "type": "number"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "membership": {
+                            "title": "Frequent Traveler Programs (FTPs)",
+                            "description": "The Frequent Traveler Program (FTP) to be applied to the reservation. This entitles the user the opportunity to earn miles or points with ABG partners, such as airlines, hotels and other select companies. For example, the Lufthansa Miles & More Rewards Program. Surcharges may apply.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "required": [
+                              "code"
+                            ],
+                            "properties": {
+                              "code": {
+                                "title": "Frequent Traveler Program number",
+                                "description": "The unique Frequent Traveler Program (FTP) number of the traveler.",
+                                "example": "M21R322",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "age": {
+                            "title": "Age",
+                            "description": "Driver’s age. This might influence the rates. Will be superseded by date of birth found in the profile provided in “membership_code”.",
+                            "example": 25,
+                            "type": "number"
+                          },
+                          "date_of_birth": {
+                            "title": "Date of Birth",
+                            "description": "Driver’s date of birth. This might influence the rates. Will be superseded by “age” parameter or date of birth found in the profile provided in “membership_code”",
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "partner_loyalty": {
+                            "title": "Partner Loyalty",
+                            "description": "The partner loyalty discount program. The partner loyalty to be applied to drive the rate of booking.",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                              "program": {
+                                "title": "Partner Program Name",
+                                "description": "Valid partner loyalty program from the user request, as agreed by partner integration.",
+                                "example": "Platinum",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "partner_discount": {
+                            "title": "Partner Discount",
+                            "description": "The partner commercial discount program. The discount to be applied to drive the rate of the booking. ",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                              "program": {
+                                "title": "Commercial Discount Name",
+                                "description": "Valid partner discount name from the user request, as agreed by partner integration.",
+                                "example": "VIP",
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "mapped_discounts": {
+                        "title": "Mapped discounts",
+                        "description": "Mapped Avis Budget Group discounts along with their free options.",
+                        "type": "array",
+                        "items": {
+                          "title": "Commercial discount",
+                          "description": "The commercial rental vehicle brand rewards program code (also known as discount code). The discounts applied to the rate of the reservation.",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "required": [
+                            "brand",
+                            "code"
+                          ],
+                          "properties": {
+                            "brand": {
+                              "title": "The Avis, Budget, or Payless brand name.",
+                              "description": "ABG supported brand names like Avis, Budget, or Payless..",
+                              "enum": [
+                                "Avis",
+                                "Budget",
+                                "Payless"
+                              ],
+                              "example": "Avis",
+                              "type": "string"
+                            },
+                            "code": {
+                              "title": "Discount code",
+                              "description": "The rental vehicle brand discount code. This field can be an Avis Worldwide Discount (AWD), Budget Car Discount (BCD), or a Payless Discount Number (PDN) code.",
+                              "example": "R566100",
+                              "type": "string"
+                            },
+                            "percent": {
+                              "title": "Discount percentage",
+                              "description": "The discount percentage applied to the reservation.",
+                              "type": "integer"
+                            },
+                            "free_options": {
+                              "title": "Free options",
+                              "description": "Eligible free ancillary products and benefits offered.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "eligible_extras"
+                              ],
+                              "properties": {
+                                "eligible_extras": {
+                                  "title": "Eligible extras",
+                                  "description": "Eligible ancillary products for selection.",
+                                  "type": "object",
+                                  "additionalProperties": true,
+                                  "properties": {
+                                    "quantity": {
+                                      "title": "Eligible extras quantity",
+                                      "description": "The total number of ancillary products.",
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "eligible_codes": {
+                                  "title": "Extra codes",
+                                  "description": "Eligible ancillary product codes.",
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Extras code",
+                                    "description": "The rental ancillary code used to identify and add rental vehicle equipment and features to the reservation (such as GPS).",
+                                    "enum": [
+                                      "ADD",
+                                      "ADR",
+                                      "AFO",
+                                      "ATC",
+                                      "BBS",
+                                      "BKF",
+                                      "BKR",
+                                      "BXL",
+                                      "BXM",
+                                      "BXS",
+                                      "CBS",
+                                      "CCO",
+                                      "CCP",
+                                      "CFS",
+                                      "CHG",
+                                      "CIS",
+                                      "CNP",
+                                      "CSD",
+                                      "CSS",
+                                      "DCF",
+                                      "DEC",
+                                      "DIE",
+                                      "DIS",
+                                      "EPU",
+                                      "ESP",
+                                      "FRD",
+                                      "FSK",
+                                      "GEL",
+                                      "GPS",
+                                      "GSO",
+                                      "HDL",
+                                      "ICW",
+                                      "INC",
+                                      "IP5",
+                                      "IXB",
+                                      "MPG",
+                                      "NAV",
+                                      "NSF",
+                                      "PAC",
+                                      "RSN",
+                                      "SKI",
+                                      "SKR",
+                                      "SNC",
+                                      "SNW",
+                                      "STA",
+                                      "TAB",
+                                      "TCT",
+                                      "TPR",
+                                      "TRO",
+                                      "VCD",
+                                      "WFI",
+                                      "XMR",
+                                      "BAT",
+                                      "CSB"
+                                    ],
+                                    "example": "GPS",
+                                    "type": "string"
+                                  }
+                                },
+                                "meet_and_greet": {
+                                  "title": "Meet and Greet",
+                                  "description": "Indicates the free meet and greet feature for the brand.",
+                                  "example": true,
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "pickup_date_range": {
+                              "title": "Pickup date range",
+                              "description": "Pickup date range for the eligibility of promotional discounts.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "to",
+                                "from"
+                              ],
+                              "properties": {
+                                "to": {
+                                  "title": "To date",
+                                  "description": "End date for the data range in ISO 8601 representation.",
+                                  "example": "2019-06-30T23:59:59Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "from": {
+                                  "title": "From date",
+                                  "description": "Start date for the date range ISO 8601 representation.",
+                                  "example": "2019-04-01T00:00:00Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            },
+                            "dropoff_date_range": {
+                              "title": "Dropoff date range",
+                              "description": "Dropoff date range for eligibility of the promotional discounts.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "to",
+                                "from"
+                              ],
+                              "properties": {
+                                "to": {
+                                  "title": "To date",
+                                  "description": "End date for the data range in ISO 8601 representation.",
+                                  "example": "2019-06-30T23:59:59Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "from": {
+                                  "title": "From date",
+                                  "description": "Start date for the date range ISO 8601 representation.",
+                                  "example": "2019-04-01T00:00:00Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            },
+                            "reservation_date_range": {
+                              "title": "Booking date range",
+                              "description": "Boking date range for the promotional discounts.",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "required": [
+                                "to",
+                                "from"
+                              ],
+                              "properties": {
+                                "to": {
+                                  "title": "To date",
+                                  "description": "End date for the data range in ISO 8601 representation.",
+                                  "example": "2019-06-30T23:59:59Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "from": {
+                                  "title": "From date",
+                                  "description": "Start date for the date range ISO 8601 representation.",
+                                  "example": "2019-04-01T00:00:00Z",
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "best_discount": {
+                        "title": "Best discount",
+                        "description": "Represent the best discount with the provided passenger(s) information when there is more than one passenger.",
+                        "example": true,
+                        "type": "boolean"
+                      },
+                      "driver": {
+                        "title": "Driver of the vehicle",
+                        "description": "Indicator to represent the primary or secondary driver of the vehicle.",
+                        "enum": [
+                          "primary",
+                          "secondary"
+                        ],
+                        "example": "primary",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request is returned when the request could not be understood by the server. 400 includes missing required values, invalid data types, minimum/maximum values, ranges and format.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "400 Bad Request",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "400",
+                      "message": "Bad request",
+                      "reason": "invalid_request",
+                      "details": "Specified parameter <parameter name> is not valid"
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404 Not Found is returned when server cannot find the matching request URI (either due to no results, or because of a non-existent endpoint or resource). Server may also respond with this status code when there is 401 or 403, which the service wants to mask for security reasons.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "404 Not Found",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "404",
+                      "message": "Resource not found",
+                      "reason": "resource_failure",
+                      "details": "Server cannot find the requested resource. This may be due to incorrect URI or a resource that is not available."
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "A request method is not supported for the requested resource; for example, a GET request on a form that requires data to be presented via POST, or a PUT request on a read-only resource.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "405 Method Not Allowed",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "405",
+                      "message": "Method not allowed",
+                      "reason": "invalid_request",
+                      "details": "Invalid HTTP message"
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "The requested resource is capable of generating only content not acceptable according to the Accept headers sent in the request.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "406 Not Accecptable",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "406",
+                      "message": "Invalid content type",
+                      "reason": "not_accecptable",
+                      "details": "Invalid content type in the request payload"
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "The request entity has a media type which the server or resource does not support. For example, the client uploads an image as image/svg+xml, but the server requires that images use a different format.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "415 Unsupported Media Type",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "415",
+                      "message": "Unsupported media type",
+                      "reason": "unsupported media type",
+                      "details": ""
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500 Internal Server Error is returned when a system or application error has occurred. It generally indicates that something unexpected has gone wrong on the server. This is used for a standard server side exception for a persistent error on the server side.        \n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "title": "500 Internal Server Error",
+              "description": "ABG common error object, which has error and transaction details which helps identify the root cause of the request failure.",
+              "example": {
+                "status": {
+                  "request_time": "2019-01-04T15:15:30Z",
+                  "request_errors": 1,
+                  "errors": [
+                    {
+                      "code": "500",
+                      "message": "Service exception",
+                      "reason": "System exception from e-com backend.",
+                      "details": "System Exception occurred. Please check the log for details."
+                    }
+                  ]
+                },
+                "transaction": {
+                  "id": "227a1700-43e1-11e9-95ce-e6a7a0e31bec",
+                  "system_id": "C56a1700-43e1-11e9-95ce-e6a7a0e31bec"
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "transaction",
+                "status"
+              ],
+              "properties": {
+                "transaction": {
+                  "title": "Transaction",
+                  "description": "Transaction details that may be used by your application to identify a request.",
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "system_id": {
+                      "title": "Internal correlation  identifier",
+                      "description": "A unique identifier generated internally by the application to identify the payload and troubleshoot.",
+                      "example": "i9332ffa-5250-11e9-8647-d663bd873d78",
+                      "type": "string"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "request_time",
+                    "request_errors",
+                    "errors"
+                  ],
+                  "properties": {
+                    "request_time": {
+                      "title": "Request time",
+                      "description": "The time stamp of the request",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "request_errors": {
+                      "title": "Request errors",
+                      "description": "The number of errors that occurred",
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "title": "Errors",
+                      "description": "A detailed description of the reason for a request failure",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "required": [
+                          "code",
+                          "message",
+                          "reason",
+                          "details"
+                        ],
+                        "properties": {
+                          "code": {
+                            "title": "HTTP status code",
+                            "description": "HTTP status code for the response",
+                            "example": "400",
+                            "type": "string"
+                          },
+                          "message": {
+                            "title": "Response Message",
+                            "description": "Based on the type of response it displays either success or error message",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "reason": {
+                            "title": "Response reason",
+                            "description": "Currently, this field is applicable only for error scenarios, which contains the detailed error message.",
+                            "example": "Success",
+                            "type": "string"
+                          },
+                          "details": {
+                            "title": "Response details",
+                            "description": "Based on the kind of response this field contains either success or error details. In the case of errors, this field indicates the reason of request failure.",
+                            "example": "Success",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ABG-Access-Token": []
+          }
+        ]
+      }
     }
+  }
+}
+
   ]
 }
