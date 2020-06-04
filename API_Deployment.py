@@ -60,12 +60,12 @@ print "Product Proxy Configuration Updated  =>" + service_id
 
 #Apply Product Active Docs
 #Apply Product Active Docs
-activedocs_config_spec=json.dumps(activedocs_config["body"]) 
+#activedocs_config_spec=json.dumps(activedocs_config["body"]) 
 
 for activedocs_config in active_docs_configs["active_docs_configs"]:
     
-    activedocs_config_spec=json.dumps(activedocs_config["body"])
-    product_activedocs_cmd = 'curl -k -s -X POST "https://' + admin_url + \
+activedocs_config_spec=json.dumps(activedocs_config["body"])
+product_activedocs_cmd = 'curl -k -s -X PUT "https://' + admin_url + \
                                        '/admin/api/active_docs.json"' + \
                                         ' -d \'access_token=' + admin_accesstoken + '\'' + \
 
@@ -76,7 +76,8 @@ for activedocs_config in active_docs_configs["active_docs_configs"]:
                                         ' --data-urlencode \'system_name=' + activedocs_config["system_name"] + '\'' + \
                                         ' --data-urlencode \'skip_swagger_validations=' + activedocs_config["skip_swagger_validations"] + '\''
                                         
-    product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)                                 
+product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)                                 
+print "product_activedocs_cmd " + product_activedocs_cmd
 print "Product Active docs added " + product_activedocs
 
 
