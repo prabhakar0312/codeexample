@@ -15,6 +15,8 @@ filename = sys.argv[1]
 policy_filename = sys.argv[2]
 active_docs_filename = sys.argv[3]
 
+active_docs_configs=json.loads(readFile(active_docs_filename))
+
 product_deploy_config=json.loads(readFile(filename))
 policy_config=json.loads(readFile(policy_filename))
 admin_url = '3scale-admin.dev.apps.api-np.abgapiservices.com'
@@ -57,8 +59,24 @@ product_proxy = subprocess.check_output(product_proxy_cmd, shell=True, universal
 print "Product Proxy Configuration Updated  =>" + service_id
 
 #Apply Product Active Docs
-activedocs_cmd='3scale -k activedocs apply abg-cicd Promo --description=Test --service-id='+str(service_id)+' --openapi-spec='+ active_docs_filename +' -p --name=Rentalstest'                                        
-product_activedocs = subprocess.check_output(activedocs_cmd, shell=True, universal_newlines=True)                                 
+#Apply Product Active Docs
+activedocs_config_spec=json.dumps(activedocs_config["body"]) 
+
+for activedocs_config in active_docs_configs["active_docs_configs"]:
+    
+    activedocs_config_spec=json.dumps(activedocs_config["body"])
+    product_activedocs_cmd = 'curl -k -s -X POST "https://' + admin_url + \
+                                       '/admin/api/active_docs.json"' + \
+                                        ' -d \'access_token=' + admin_accesstoken + '\'' + \
+
+                                        ' --data-urlencode \'name=' + activedocs_config["name"] + '\'' + \
+                                        ' --data-urlencode \'service_id=' + service_id + '\'' + \
+                                        ' --data-urlencode \'body=' + activedocs_config_spec + '\'' + \
+                                        ' --data-urlencode \'description=' + activedocs_config["description"] + '\'' + \
+                                        ' --data-urlencode \'system_name=' + activedocs_config["system_name"] + '\'' + \
+                                        ' --data-urlencode \'skip_swagger_validations=' + activedocs_config["skip_swagger_validations"] + '\''
+                                        
+    product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)                                 
 print "Product Active docs added " + product_activedocs
 
 
