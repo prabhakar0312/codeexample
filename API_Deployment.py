@@ -16,7 +16,6 @@ policy_filename = sys.argv[2]
 active_docs_filename = sys.argv[3]
 
 active_docs_configs=json.loads(readFile(active_docs_filename))
-
 product_deploy_config=json.loads(readFile(filename))
 policy_config=json.loads(readFile(policy_filename))
 admin_url = '3scale-admin.dev.apps.api-np.abgapiservices.com'
@@ -60,7 +59,7 @@ print "Product Proxy Configuration Updated  =>" + service_id
 
 #Apply Product Active Docs
 #Apply Product Active Docs
-#activedocs_config_spec=json.dumps(activedocs_config["body"]) 
+activedocs_config_spec=json.dumps(activedocs_config["body"]) 
 
 for activedocs_config in active_docs_configs["active_docs_configs"]:
     
@@ -73,7 +72,7 @@ for activedocs_config in active_docs_configs["active_docs_configs"]:
                                         ' --data-urlencode \'body=' + activedocs_config_spec + '\'' + \
                                         ' --data-urlencode \'description=' + activedocs_config["description"] + '\'' + \
                                         ' --data-urlencode \'system_name=' + activedocs_config["system_name"] + '\'' + \
-                                        ' --data-urlencode \'skip_swagger_validations=' + activedocs_config["skip_swagger_validations"] + '\''
+                                        ' --data-urlencode \'skip_swagger_validations=' + 'true' + '\''
     print "product_activedocs_cmd " + product_activedocs_cmd
     product_activedocs = subprocess.check_output(product_activedocs_cmd, shell=True, universal_newlines=True)                                 
     print "product_activedocs_cmd " + product_activedocs_cmd
